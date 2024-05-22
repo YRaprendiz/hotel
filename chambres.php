@@ -148,10 +148,11 @@ if (isset($_GET['id'])) {
         ?>
     </div>
 
-<div id="fotos">
+<div class='title_media'>
     <?php
-    echo "<div id='media_chambre'>";
+    echo "<h3>Disponibilité de la chambre</h3>";
     echo "<p>Photos</p>";
+    echo "<div id='media_chambre'>";
     $stmt2 = $connexion->prepare("SELECT * FROM media_chambre WHERE event = ?");
     $stmt2->execute([$_GET['id']]);
     $results = $stmt2->fetchAll();
@@ -223,14 +224,8 @@ if (isset($_GET['id'])) {
     });
 </script>
 
-<footer>
-    <div class="footer-content">
-        <a href="Facebook" target="_blank">@facebook</a>
-        <a href="Instagram" target="_blank">@instagram</a>
-        <p>Telefone: (XX) XXXX-XXXX</p>
-        <p>Email: contato@exemplo.com</p>
-        <p>© 2024 HotelMYH. Tous les droits réservés.</p>
-    </div>
-</footer>
+<?php
+include("./footer.php");
+?>
 </body>
 </html>

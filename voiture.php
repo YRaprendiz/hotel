@@ -87,9 +87,9 @@ if (isset($_GET['id'])) {
 
         echo "<div class='voiture'>";
             echo "<img src='data:image/jpeg;base64," . base64_encode($row['image']) . "' />";
-            echo "<span>" . $row['description'] . "</span>";
+            echo "<p>" . $row['description'] . "</p>";
             echo "<div><h2>" . $row['modele'] . "</h2><p>Prix: <strong>" . $row['prix'] . "</strong> €</p></div>";
-            echo "<div class='reservation-form'>";
+            echo "<div class='resv-form'>";
                 echo "<form action='' method='POST'>";
                     echo "<input type='hidden' name='voiture_id' value='" . $row['id'] . "'>";
                     echo "<input type='hidden' name='prix' value='" . $row['prix'] . "'>";
@@ -112,8 +112,9 @@ if (isset($_GET['id'])) {
 }
 ?>
 <?php
-    echo "<p>Photos</p>";
+    
     echo "<div id='media_voiture'>";
+    echo "<p>Photos</p>";
     $stmt2 = $connexion->prepare("SELECT * FROM media_voiture WHERE event = ?");
     $stmt2->execute([$_GET['id']]);
     $results = $stmt2->fetchAll();
@@ -185,15 +186,9 @@ if (isset($_GET['id'])) {
     });
 </script>
 
-<footer>
-    <div class="footer-content">
-        <a href="Facebook" target="_blank">@facebook</a>
-        <a href="Instagram" target="_blank">@instagram</a>
-        <p>Telefone: (XX) XXXX-XXXX</p>
-        <p>Email: contato@exemplo.com</p>
-        <p>© 2024 HotelMYH. Tous les droits réservés.</p>
-    </div>
-</footer>
+<?php
+include("./footer.php");
+?>
 </body>
 </html>
 

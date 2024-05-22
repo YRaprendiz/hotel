@@ -1,9 +1,10 @@
-<footer>
-        <div class="footer-content">
-                <a href="Facebook" target="_blank">@facebook</a>
-                <a href="Instagram" target="_blank">@instagram</a>
-                <p>Telefone: (XX) XXXX-XXXX</p>
-                <p>Email: contato@exemplo.com</p>
-                <p>© 2024 HotelMYH. Todos os direitos reservados.</p>
-        </div>
-</footer>
+<div class="footer-content">
+                <div class="box">
+                <h2><a href='index.php' target="_blank">Home</a> |
+                <a href="xfooter.php" target="_blank">Contact</a></h2>
+  	       </div>
+                <p>Hotel_mywh © 2024 all right reserved.</p>
+                <p>Télephone: (XX) XXXX-XXXX</p>
+                <p>Email: mywh@gmail.com</p>
+</div>
+        

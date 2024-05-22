@@ -12,7 +12,6 @@ session_start();
     <a href="index.php">Hotel</a>
     <a href="voitures.php">Voitures</a>
     <a href="partenaire.php">Partenaire</a>
-    <a href="..\my_hotel\TESTE">TESTE</a>
     <?php
     if (isset($_SESSION['user']['type'])) {
     if ($_SESSION['user']['type'] == 2) {
