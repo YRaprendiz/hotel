@@ -133,7 +133,7 @@ if (isset($_GET['id'])) {
                 echo '<td>' . htmlspecialchars($reservation['checkout_date']) . '</td>';
                 echo '<td>';
                 if ($reservado_por_usuario) {
-                    echo '<form action="cancelar_reserva.php" method="POST" style="display:inline;">';
+                    echo '<form action="annuler_réservation.php" method="POST" style="display:inline;">';
                     echo '<input type="hidden" name="reserva_id" value="' . htmlspecialchars($reservation['id']) . '">';
                     echo '<button type="submit">Annuler</button>';
                     echo '</form>';

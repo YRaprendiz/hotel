@@ -21,17 +21,12 @@ p{
     display: flex;
     justify-content: center;
 }
-
 #TitleUser h4{
     text-align: end;
     margin: 0px;
     padding: 10px;
     background-color: black;
     color: white;
-    
-}
-#TitleUser a{
-    color: skyblue;
 }
 #Menu{
     display: flex;
@@ -184,9 +179,8 @@ p{
     background-color: black;
     color: white;
     justify-content: center;
-    padding: 1px 0;
+    padding: 10px 0;
     font-size: 15px;
-
 }
 .button {
     background-color: #555555;
@@ -208,8 +202,6 @@ p{
     padding: 10px;
     margin: 10px;
 }
-
-
 form{
     display: flex;
     flex-direction: column;
@@ -224,21 +216,6 @@ form input{
 .chambres span{
     margin: 5px;
   }
-.reservation-form form{
-    display: flex;
-    flex-direction: row;
-    width: 1050px;
-    position: relative;
-    top:-350px;
-    right: -400px;
-}
-.resv-form form{
-    display: flex;
-    flex-direction: row;
-    position: relative;
-    top:-250px;
-    right: -320px;
-}
   #media_chambre{
     display: flex;
     flex-direction: row;
@@ -248,7 +225,10 @@ form input{
     padding: 10px;
     margin: 10px;
     flex-wrap: wrap;
-   
+    position: relative;
+    top: -650px;
+    left: 450px;
+
 }
 
 #media_chambre .media{
@@ -264,8 +244,16 @@ form input{
     max-width: 30%;
     padding: 10px;
 }
-
-
+.title_media h3{
+    position: relative;
+    top: -610px;
+    left: 300px;
+}
+.title_media p{
+    position: relative;
+    top: -610px;
+    left: 500px;
+}
 
 .msg p{
     position: relative;
@@ -276,52 +264,4 @@ form input{
     position: relative;
     top: -40px;
     left: 600px;
-}
-thead tr{
-    position: relative;
-    top: -5px;
-    left: 45px;
-    background: firebrick;
-    margin: 5px;
-}
-tbody tr{
-    flex-wrap: wrap;
-    border: 1px solid #ddd;
-    position: relative;
-    left: 45px;
-    background: wheat;
-    text-align: center;
-}
-.all_user thead tr{
-    position: relative;
-    top: -5px;
-    left: 0px;
-    background: firebrick;
-    margin: 5px;
-}
-.all_user tbody tr{
-    flex-wrap: wrap;
-    border: 1px solid #ddd;
-    position: relative;
-    left: 0px;
-    background: wheat;
-    text-align: center;
-}
-.form-table tbody{
-    position: relative;
-    right: 450px;
-}
-
-.form-res tr{
-    position: relative;
-    top: -250px;
-    left: 150px;
-    
-}
-.form-res th{
-    background: firebrick;
-}
-div table{
-    position: relative;
-    right: -450px;
 }
