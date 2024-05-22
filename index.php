@@ -26,7 +26,6 @@ if(!$connexion->query($sql)){
             echo "<div><h2>" . $row['type'] . "</h2>";
             echo "<p>chambre: ".$row['nb_max_chambre']." persones</p>";
             echo "<p>Prix par nuit: " . $row['prix_nuit'] . " €</p></div>";
-            echo "toilets,lit'localization,Parking,wify,dejuner , l'hore de check_in,l'hore de check_out";
                 echo "<div><a href='chambres.php?id=" . $row['id'] . "' class='button'>Voir détails</a></div>";
             echo "</div>";
     }

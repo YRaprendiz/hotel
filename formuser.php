@@ -25,6 +25,7 @@ if (isset($_SESSION['user']['type'])) {
 
 <!-- Tabela de Usuários -->
 <h3>Utilisateurs enregistrés</h3>
+<div class='all_user'>
 <table>
     <thead>
         <tr>
