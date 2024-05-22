@@ -10,7 +10,6 @@ include("./header.php");
 include("./connexion.php");
 include("./tab.php");
 ?>
- 
 <?php
 echo "<h3>Notres Chambres</h3>";
 // Consulta SQL para recuperar os dados dos quartos

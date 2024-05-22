@@ -14,26 +14,20 @@
     <input list="places" type="text" id="city" name="city" required autoComplete="off" pattern=".*">
     <datalist id="places">
         <?php
-        // Conexão com o banco de dados
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "hotel"; // Substitua pelo nome do seu banco de dados
-
-        // Criar conexão
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        // Verificar conexão
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        $dsn="mysql:dbname=hotel;host=localhost";
+        try{
+            $connexion=new PDO($dsn,"root","");
         }
-
+        catch(PDOException $e){
+            printf("Échec de la connexion : %s\n", $e->getMessage());
+            exit();
+        }
         // Consulta SQL para buscar `id` e `type`
-        $sql = "SELECT id, type FROM chambres";
+        $sql = "SELECT 'id' , type FROM chambres";
         $result = $conn->query($sql);
 
         // Preencher a datalist com os resultados
-        if ($result->num_rows > 0) {
+        if ($result-> $row) {
             while ($row = $result->fetch_assoc()) {
                 echo "<option value='{$row['id']} - {$row['type']}'></option>";
             }
@@ -52,7 +46,7 @@
 // Lógica para lidar com o envio do formulário, se necessário
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $city = $_POST['city'];
-    echo "<p>Você pesquisou por: $city</p>";
+    echo "<p>Vous avez recherché : $city</p>";
 }
 ?>
 
