@@ -7,13 +7,20 @@
 <?php
 // Incluir arquivos necessários
 include("./header.php");
-include("./connexion.php");
+$dsn="mysql:dbname=hotel;host=localhost";
+try{
+    $connexion=new PDO($dsn,"root","");
+}
+catch(PDOException $e){
+    printf("Échec de la connexion : %s\n", $e->getMessage());
+    exit();
+}
 include("./tab.php");
 
 echo "<h3>Notres Chambres</h3>";
 // Requête SQL pour récupérer les données de la pièce
 $sql = "SELECT * FROM `chambres`";
-if(!$connexion->query($sql)){
+if($connexion->query($sql)){
     echo "<div id='listChambres'>";
       // Parcourez les résultats de la requête
     foreach ($connexion->query($sql) as $row) {
