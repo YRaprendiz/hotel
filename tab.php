@@ -7,40 +7,36 @@
 </head>
 <body>
 
-<form id="city" method="POST" action="">
-    <label for="city">
-        Your city hotel
-    </label>
-    <input list="places" type="text" id="city" name="city" required autoComplete="off" pattern=".*">
-    <datalist id="places">
-        <?php
-        $dsn="mysql:dbname=hotel;host=localhost";
-        try{
-            $connexion=new PDO($dsn,"root","");
-        }
-        catch(PDOException $e){
-            printf("Échec de la connexion : %s\n", $e->getMessage());
-            exit();
-        }
-        // Consulta SQL para buscar `id` e `type`
-        $sql = "SELECT 'id' , type FROM chambres";
-        $result = $conn->query($sql);
+<form id="city-form" method="POST" action="">
+        <label for="city-input">
+            Your city hotel
+        </label>
+        <input list="places" type="text" id="city-input" name="city" required autoComplete="off" pattern=".*">
+        <datalist id="places">
+            <?php
+            $dsn = "mysql:dbname=hotel;host=localhost";
+            try {
+                $connexion = new PDO($dsn, "root", "");
+                $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Preencher a datalist com os resultados
-        if ($result-> $row) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<option value='{$row['id']} - {$row['type']}'></option>";
+                // Correct SQL query to select id and type
+                $sql = "SELECT id, type FROM chambres";
+                $stmt = $connexion->query($sql);
+
+                // Fetch results and populate datalist
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<option value='{$row['id']} - {$row['type']}'></option>";
+                }
+
+                // Close connection
+                $connexion = null;
+            } catch (PDOException $e) {
+                echo "<option value='Échec de la connexion : {$e->getMessage()}'></option>";
             }
-        } else {
-            echo "<option value='No results'></option>";
-        }
-
-        // Fechar conexão
-        $conn->close();
-        ?>
-    </datalist>
-    <button type="submit">Chercher</button>
-</form>
+            ?>
+        </datalist>
+        <button type="submit">Chercher</button>
+    </form>
 
 <?php
 // Lógica para lidar com o envio do formulário, se necessário
