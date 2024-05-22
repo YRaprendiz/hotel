@@ -9,16 +9,13 @@
 include("./header.php");
 include("./connexion.php");
 include("./tab.php");
-?>
-<?php
+
 echo "<h3>Notres Chambres</h3>";
-// Consulta SQL para recuperar os dados dos quartos
+// Requête SQL pour récupérer les données de la pièce
 $sql = "SELECT * FROM `chambres`";
 if(!$connexion->query($sql)){
-    echo "Pb d'accès au events";
-} else {
     echo "<div id='listChambres'>";
-      // Loop através dos resultados da consulta
+      // Parcourez les résultats de la requête
     foreach ($connexion->query($sql) as $row) {
         echo "<div class='chambres'>";
             echo "<img src='data:image/jpeg;base64," . base64_encode($row['image']) . "' />";
@@ -29,8 +26,9 @@ if(!$connexion->query($sql)){
             echo "</div>";
     }
     echo "</div>";
+} else {
+    echo "Pb d'accès au events";
 }
-// Incluir rodapé
 include("./footer.php");
 ?>
 </body>

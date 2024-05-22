@@ -10,7 +10,7 @@
 <form id="city-form" method="POST" action="">
         <label for="city-input">
             Your city hotel
-        </label>
+        </label><button type="submit">Chercher</button>
         <input list="places" type="text" id="city-input" name="city" required autoComplete="off" pattern=".*">
         <datalist id="places">
             <?php
@@ -18,16 +18,13 @@
             try {
                 $connexion = new PDO($dsn, "root", "");
                 $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                 // Correct SQL query to select id and type
                 $sql = "SELECT id, type FROM chambres";
                 $stmt = $connexion->query($sql);
-
                 // Fetch results and populate datalist
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     echo "<option value='{$row['id']} - {$row['type']}'></option>";
                 }
-
                 // Close connection
                 $connexion = null;
             } catch (PDOException $e) {
@@ -35,7 +32,7 @@
             }
             ?>
         </datalist>
-        <button type="submit">Chercher</button>
+        
     </form>
 
 <?php
