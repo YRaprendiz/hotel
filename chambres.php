@@ -108,8 +108,8 @@ if (isset($_GET['id'])) {
     echo "ID de chambre non spécifié.";
 }
 ?>
-    <div id="formulario-de-reservas-do-quarto">
-        <h3>Disponibilité de la chambre</h3>
+    <div id="form-res">
+        
         <?php
         if (isset($chambre_id)) {
             $reservations_query = "SELECT r.id, r.user, r.email_user, r.checkin_date, r.checkout_date, u.prenom, u.nom
@@ -120,7 +120,7 @@ if (isset($_GET['id'])) {
             $reservations_stmt->execute([$chambre_id]);
             $reservations = $reservations_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            echo '<table border="1">';
+            echo '<table>';
             echo '<tr><th>ID</th><th>Utilisateur</th><th>Email</th><th>Check-in</th><th>Check-out</th><th>Action</th></tr>';
 
             foreach ($reservations as $reservation) {
