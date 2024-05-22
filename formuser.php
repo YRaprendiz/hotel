@@ -15,10 +15,6 @@ if (isset($_SESSION['user']['type'])) {
     $user_type = $_SESSION['user']['type'];
 
     if ($user_type == 2) {
-        // Exibir o botão para administradores tipo 2
-        echo "<a href='formuser.php' class='button'>All Users</a>";
-
-        // Consultar todos os usuários registrados
         $users_stmt = $connexion->query("SELECT * FROM user");
         $users = $users_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
