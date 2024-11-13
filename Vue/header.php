@@ -17,7 +17,7 @@ session_start();
     <?php
     if (isset($_SESSION['user']['type'])) {
     if ($_SESSION['user']['type'] == 2) {
-        echo "<a href='formuser.php'>ALL Users</a>";
+        echo "<a href='detailUtilisateur.php'>ALL Users</a>";
     } elseif ($_SESSION['user']['type'] == 1) {
         // Usuário do tipo 1, não exibe nada
     }
