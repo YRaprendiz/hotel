@@ -16,6 +16,9 @@ switch ($page) {
     case 'chambre':
         include "../controleur/chambreControleur.php";
         break;
+        case 'allUsers':
+            include "../controleur/allUsers.php";
+            break;
     default:
         include "../vue/index.php";
         break;

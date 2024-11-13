@@ -13,9 +13,9 @@ session_start();
 
 <div id="Menu">
     <a href="index.php">Hotel</a>
-    <a href="voitures.php">Voitures</a>
-    <a href="partenaire.php">Partenaire</a>
-    <a href="..\my_hotel\TESTE">TESTE</a>
+    <a href=" ">xxxxxxxx</a>
+    <a href=" ">xxxxxxxx</a>
+    <a href=" ">xxxxxxxx</a>
     <?php
     if (isset($_SESSION['user']['type'])) {
     if ($_SESSION['user']['type'] == 2) {

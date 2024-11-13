@@ -8,8 +8,8 @@
 
 <?php
 // Incluir arquivos necessários
-include("../header.php");  // Assurez-vous que le header est inclus
-include("./bdd/connexion.php"); // Connexion à la base de données
+include("../model/header.php");  // Assurez-vous que le header est inclus
+include ("../base_de_donne/connexion.php"); // Connexion à la base de données
 ?>
 
 <h3>Nos Chambres</h3>
@@ -44,7 +44,7 @@ if (!$connexion->query($sql)) {
 }
 
 // Inclure le footer
-include("./vue/footer.php");
+include("./footer.php");
 ?>
 
 </body>
