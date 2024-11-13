@@ -1,5 +1,5 @@
 <?php
-include ("../base_de_donne/connexion.php");
+include ("../bdd/connexion.php");
 include ("../Model/mainModele.php");
 include ("../vue/header.php");
 

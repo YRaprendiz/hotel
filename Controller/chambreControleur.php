@@ -1,6 +1,6 @@
 <?php
 include('../model/chambreModel.php');
-include ("../base_de_donne/connexion.php");
+include ("../bdd/connexion.php");
 
 if(isset($_POST['action'])) {
 
