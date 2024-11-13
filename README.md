@@ -9,14 +9,13 @@ Hotel/
 ├── modele/
 │   ├── mainModele.php
 │   └── chambreModele.php
-└── vue/
-    ├── header.php
-    ├── footer.php
-    ├── index.php
-    ├── listeChambre.php
-    ├── detailsChambre.php
-    └── reservationChambre.php
-
+├── vue/
+|    ├── header.php
+|    ├── footer.php
+|    ├── listeChambre.php
+|    ├── detailsChambre.php
+|    └── reservationChambre.php
+└──── index.php
 
 it will interract whit  this mySQL;
 

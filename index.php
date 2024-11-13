@@ -1,3 +1,7 @@
+
+</body>
+</html>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +10,12 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 
+<body>
+
 <?php
-// Incluir arquivos necessários
-include("../model/header.php");  // Assurez-vous que le header est inclus
-include ("../base_de_donne/connexion.php"); // Connexion à la base de données
+// Incluir arquivos nécessaires
+include("./vue/header.php"); // Correction du chemin vers le header
+include("./bdd/connexion.php"); // Correction du chemin vers connexion.php
 ?>
 
 <h3>Nos Chambres</h3>
@@ -36,7 +42,7 @@ if (!$connexion->query($sql)) {
         echo "<p>Services: Toilettes, Lit, Localisation, Parking, Wi-Fi, Déjeuner, Check-in et Check-out horaires</p>";
         
         // Lien pour voir les détails de la chambre
-        echo "<div><a href='chambres.php?id=" . $row['id'] . "' class='button'>Voir détails</a></div>";
+        echo "<div><a href='detailsChambre  .php?id=" . $row['id'] . "' class='button'>Voir détails</a></div>";
         
         echo "</div>";  // Fermeture div 'chambres'
     }
@@ -44,7 +50,7 @@ if (!$connexion->query($sql)) {
 }
 
 // Inclure le footer
-include("./footer.php");
+include("./vue/footer.php"); // Correction du chemin vers le footer
 ?>
 
 </body>

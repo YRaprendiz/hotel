@@ -9,8 +9,6 @@ session_start();
     </h4>
 </div>
 
-<div id="TitleTop"><a href='index.php'> <img src="logo.webp" alt="logo"></a></div>
-
 <div id="Menu">
     <a href="index.php">Hotel</a>
     <a href=" ">xxxxxxxx</a>

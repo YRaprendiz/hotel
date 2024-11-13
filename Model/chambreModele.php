@@ -1,6 +1,4 @@
-<?php
-
-//CRUD
+<?php//CRUD
 
 class Chambre 
 {
