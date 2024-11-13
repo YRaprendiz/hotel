@@ -1,7 +1,7 @@
 <?php
-include "../bdd/connexion.php";
-include "../modele/mainModele.php";
-include "../vue/header.php";
+include ("../base_de_donne/connexion.php");
+include ("../Modele/mainModele.php");
+include ("../vue/header.php");
 
 if (isset($_GET['page'])) {
     $page = $_GET['page'];
