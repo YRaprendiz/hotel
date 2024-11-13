@@ -1,4 +1,22 @@
 hi there this is youraprendiz and in here is suposed to be a project of an aplication web named hotel ;
+Hotel/
+├── bdd/
+│   ├── connexion.php
+│   └── requetes.php
+├── controleur/
+│   ├── mainControleur.php
+│   └── chambreControleur.php
+├── modele/
+│   ├── mainModele.php
+│   └── chambreModele.php
+└── vue/
+    ├── header.php
+    ├── footer.php
+    ├── index.php
+    ├── listeChambre.php
+    ├── detailsChambre.php
+    └── reservationChambre.php
+
 
 it will interract whit  this mySQL;
 
