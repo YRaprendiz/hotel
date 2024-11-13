@@ -15,7 +15,7 @@ if(isset($_POST['action'])) {
 			break;
 
 		case 'supprimer':
-		 $profController->delete();
+		 $chambreController->delete();
 			break;
 
 		default:
@@ -25,13 +25,13 @@ if(isset($_POST['action'])) {
 }
 
 
-class ProfController 
+class ChambreController 
 {
-	private $prof;
+	private $chambre;
 
 	function __construct($bdd)
 	{
-		$this->prof = new Prof($bdd);
+		$this->chambre = new Chambre($bdd);
 	}
 
 	public function create()
@@ -39,7 +39,7 @@ class ProfController
 
 		//verif
 
-		$this->prof->ajouterProf($_POST['nom'], $_POST['prenom'], $_POST['matiere'], $_POST['salle']);
+		$this->chambre->ajouterChambre($_POST['nom'], $_POST['prenom'], $_POST['matiere'], $_POST['salle']);
 
 		//redirection 
 		header('Location:http://127.0.0.1/ecole/');
@@ -49,7 +49,7 @@ class ProfController
 	public function delete()
 	{
 
-		$this->prof->supprimerProf($_POST['idProf']);
+		$this->chambre->supprimerChambre($_POST['idChambre']);
 		header('Location:http://127.0.0.1/ecole/');
 	}
 
