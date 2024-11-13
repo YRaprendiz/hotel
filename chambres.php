@@ -10,6 +10,7 @@
 <?php
 include("./header.php");
 include("./connexion.php");
+ 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $required_fields = ['chambre_id', 'checkin_date', 'checkout_date', 'prix'];
     $all_fields_filled = true;
@@ -65,7 +66,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-echo "<h3>Hotel</h3>";
 
 if (isset($_GET['id'])) {
     $chambre_id = $_GET['id'];
@@ -79,12 +79,11 @@ if (isset($_GET['id'])) {
         $reservations_stmt->execute([$chambre_id]);
         $reservations = $reservations_stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        echo "<div class='chambres'>";
+        echo "<div class='chambres_dtls'>";
             echo "<img src='data:image/jpeg;base64," . base64_encode($row['image']) . "' />";
             echo "<span>" . $row['description'] . "</span>";
             echo "<div><h2>" . $row['type'] . "</h2><p>Prix par nuit: <strong>" . $row['prix_nuit'] . "</strong> €</p></div>";
             echo "<div class='reservation-form'>";
-            if (isset($_SESSION['user'])) {
                 echo "<form action='' method='POST'>";
                     echo "<input type='hidden' name='chambre_id' value='" . $row['id'] . "'>";
                     echo "<input type='hidden' name='prix' value='" . $row['prix_nuit'] . "'>";
@@ -94,12 +93,10 @@ if (isset($_GET['id'])) {
                     echo "<input type='text' id='checkout_date' name='checkout_date' class='datepicker' required>";
                     echo "<button type='submit' class='button'>Réserver</button>";
                 echo "</form>";
-            } else {
-                echo "Veuillez vous connecter pour réserver une chambre.";
-            }
             echo "</div>";
         echo "</div>";
 
+        
         echo "<div id='availability-calendar'></div>";
     } else {
         echo "Aucune chambre trouvée avec l'ID spécifié.";
@@ -108,7 +105,7 @@ if (isset($_GET['id'])) {
     echo "ID de chambre non spécifié.";
 }
 ?>
-    <div id="form-res">
+<div class="form-res">
         
         <?php
         if (isset($chambre_id)) {
@@ -133,7 +130,7 @@ if (isset($_GET['id'])) {
                 echo '<td>' . htmlspecialchars($reservation['checkout_date']) . '</td>';
                 echo '<td>';
                 if ($reservado_por_usuario) {
-                    echo '<form action="annuler_réservation.php" method="POST" style="display:inline;">';
+                    echo '<form action="cancelar_reserva.php" method="POST" style="display:inline;">';
                     echo '<input type="hidden" name="reserva_id" value="' . htmlspecialchars($reservation['id']) . '">';
                     echo '<button type="submit">Annuler</button>';
                     echo '</form>';
@@ -147,7 +144,6 @@ if (isset($_GET['id'])) {
         }
         ?>
     </div>
-
 <div class='title_media'>
     <?php
     echo "<h3>Disponibilité de la chambre</h3>";
@@ -223,6 +219,7 @@ if (isset($_GET['id'])) {
         });
     });
 </script>
+
 
 <?php
 include("./footer.php");

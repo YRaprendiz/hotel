@@ -3,26 +3,34 @@
 <head>
     <meta charset="utf-8" />    <title>Hotel MYHW</title>    <link rel="stylesheet" href="style.css" />
 </head>
-
 <?php
 // Incluir arquivos necessários
 include("./header.php");
-$dsn="mysql:dbname=hotel;host=localhost";
-try{
-    $connexion=new PDO($dsn,"root","");
-}
-catch(PDOException $e){
-    printf("Échec de la connexion : %s\n", $e->getMessage());
-    exit();
-}
-include("./tab.php");
-
-echo "<h3>Notres Chambres</h3>";
-// Requête SQL pour récupérer les données de la pièce
+include("./connexion.php");
+?>
+<body>
+<form id="city">
+        <label for="city">
+            Your city hotel
+        </label>
+        <input list="places" type="text" id="city" name="city" required autoComplete="off" pattern="Amsterdam|Berlin|Dublin|London|Paris"/>
+        <datalist id="places">
+            <option>Amsterdam</option>
+            <option>Berlin</option>
+            <option>Dublin</option>
+            <option>London</option>
+            <option>Paris</option>
+        </datalist>
+        <button>Submit</button>
+</form>
+<?php
+// Consulta SQL para recuperar os dados dos quartos
 $sql = "SELECT * FROM `chambres`";
-if($connexion->query($sql)){
+if(!$connexion->query($sql)){
+    echo "Pb d'accès au events";
+} else {
     echo "<div id='listChambres'>";
-      // Parcourez les résultats de la requête
+      // Loop através dos resultados da consulta
     foreach ($connexion->query($sql) as $row) {
         echo "<div class='chambres'>";
             echo "<img src='data:image/jpeg;base64," . base64_encode($row['image']) . "' />";
@@ -33,10 +41,13 @@ if($connexion->query($sql)){
             echo "</div>";
     }
     echo "</div>";
-} else {
-    echo "Pb d'accès au events";
 }
+// Incluir rodapé
 include("./footer.php");
 ?>
 </body>
 </html>
+
+
+
+

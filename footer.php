@@ -6,5 +6,5 @@
                 <p>Hotel_mywh © 2024 all right reserved.</p>
                 <p>Télephone: (XX) XXXX-XXXX</p>
                 <p>Email: mywh@gmail.com</p>
-</div>
+        </div>
         

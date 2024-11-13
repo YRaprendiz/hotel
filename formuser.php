@@ -15,6 +15,10 @@ if (isset($_SESSION['user']['type'])) {
     $user_type = $_SESSION['user']['type'];
 
     if ($user_type == 2) {
+        // Exibir o botão para administradores tipo 2
+    
+
+        // Consultar todos os usuários registrados
         $users_stmt = $connexion->query("SELECT * FROM user");
         $users = $users_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -44,7 +48,7 @@ if (isset($_SESSION['user']['type'])) {
         <?php endforeach; ?>
     </tbody>
 </table>
-
+</div>
 <?php
     } elseif ($user_type == 1) {
         // Usuário do tipo 1, não exibe nada
@@ -53,6 +57,7 @@ if (isset($_SESSION['user']['type'])) {
 } else {
     echo "Accès non autorisé.";
 }
+include ("./footer.php");
 ?>
 
 </body>

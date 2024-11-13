@@ -185,7 +185,6 @@ if (isset($_GET['id'])) {
         });
     });
 </script>
-
 <?php
 include("./footer.php");
 ?>
