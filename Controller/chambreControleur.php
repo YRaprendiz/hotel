@@ -1,7 +1,7 @@
 <?php
-include "../modele/chambreModele.php";
-include "../vue/listeChambre.php";
-include "../vue/detailsChambre.php";
+include ("../vue/listeChambre.php");
+include ("../modele/chambreModele.php");
+include ("../vue/detailsChambre.php");
 
 if (isset($_GET['id'])) {
     $chambre = getChambreById($_GET['id']);

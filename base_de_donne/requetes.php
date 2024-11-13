@@ -1,5 +1,5 @@
 <?php
-include "connexion.php";
+include ("./connexion.php");
 
 function getChambreById($id) {
     global $connexion;

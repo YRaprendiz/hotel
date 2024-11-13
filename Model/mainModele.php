@@ -1,6 +1,6 @@
 <?php
 // Inclure le fichier de connexion pour utiliser la variable $connexion
-include "../bdd/connexion.php";
+include ("../bdd/connexion.php");
 
 /**
  * Exécute une requête SQL préparée avec des paramètres et retourne le résultat.
