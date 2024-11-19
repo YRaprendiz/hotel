@@ -25,7 +25,7 @@ class Utilisateur
 
 	public function allUtilisateur()
 	{
-		$req = $this->bdd->prepare("SELECT * FROM utilisateurs");
+		$req = $this->bdd->prepare("SELECT * FROM utilisateur");
 		$req->execute();
 		return $req->fetchAll();
 	}
@@ -33,13 +33,13 @@ class Utilisateur
 	public function supprimerUtilisateur($id)
 	{
 
-		$req = $this->bdd->prepare("DELETE FROM utilisateurs WHERE ID_Utilisateur = ?");
+		$req = $this->bdd->prepare("DELETE FROM utilisateur WHERE ID_Utilisateur = ?");
 		return $req->execute([$id]);
 	}
 
     public function updateUtilisateur($nom, $prenom, $email, $id)
     {
-        $stmt = $this->bdd->prepare("UPDATE utilisateurs SET nom = :nom, prenom = :prenom WHERE ID_Utilisateurs = :id");
+        $stmt = $this->bdd->prepare("UPDATE utilisateur SET nom = :nom, prenom = :prenom WHERE ID_Utilisateur = :id");
         $stmt->bindParam(':nom', $nom);
         $stmt->bindParam(':prenom', $prenom);
         $stmt->bindParam(':id', $id);
@@ -47,7 +47,7 @@ class Utilisateur
     }
 
     public function getUtilisateurById($id) {
-        $stmt = $this->bdd->prepare('SELECT * FROM utilisateurs WHERE ID_Utilisateur = ?');
+        $stmt = $this->bdd->prepare('SELECT * FROM utilisateur WHERE ID_Utilisateur = ?');
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
