@@ -41,15 +41,15 @@ class UtilisateurController
 		$this->utilisateur->ajouterUtilisateur($_POST['nom'], $_POST['prenom'], $_POST['email']);
 
 		//redirection 
-		header('Location:http://127.0.0.1/ecole/');
+		header('Location:http://127.0.0.1/Github/ecole/');
 
 	}
 
 	public function delete()
 	{
 
-		$this->utilisateur->supprimerUtilisateur($_POST['idEleve']);
-		header('Location:http://127.0.0.1/ecole/');
+		$this->utilisateur->supprimerUtilisateur($_POST['idUtilisateur']);
+		header('Location:http://127.0.0.1/Github/ecole/');
 	}
 
 }
