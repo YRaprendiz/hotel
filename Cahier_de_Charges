@@ -1,0 +1,150 @@
+### Cahier des Charges  
+**Projet : Développement d’un site web pour la gestion d’un hôtel (2ème année BTS SIO)**  
+
+---
+
+#### 1. **Contexte et Objectifs**  
+Le projet consiste à développer un site web dynamique pour un hôtel fictif, permettant de gérer les chambres, les réservations et d’offrir des informations aux clients. Le site devra inclure une interface utilisateur intuitive et des fonctionnalités adaptées pour les utilisateurs (clients et administrateurs).  
+
+L'objectif est d'appliquer les compétences acquises en développement web, bases de données et gestion de projet dans un environnement réaliste.  
+
+---
+
+#### 2. **Fonctionnalités à Implémenter**  
+
+**A. Frontend (Interface utilisateur)**  
+- Page d’accueil :  
+  - Présentation de l’hôtel.  
+  - Mise en avant des services.  
+- Liste des chambres :  
+  - Affichage des chambres disponibles (avec images et détails).  
+  - Bouton pour réserver une chambre.  
+- Page des détails d’une chambre :  
+  - Description complète de la chambre.  
+  - Affichage des services inclus.  
+- Formulaire de réservation :  
+  - Permettre aux clients de réserver une chambre en fournissant leurs informations.  
+  - Validation des données saisies.  
+
+**B. Backend (Administration)**  
+- Gestion des chambres :  
+  - Ajouter, modifier et supprimer des chambres.  
+  - Gestion des images associées aux chambres.  
+- Gestion des réservations :  
+  - Voir les réservations en cours et celles passées.  
+  - Supprimer ou modifier une réservation.  
+- Gestion des utilisateurs :  
+  - Deux types d’utilisateurs : Administrateurs et Clients.  
+  - Connexion sécurisée avec mots de passe hashés.  
+
+**C. Autres fonctionnalités**  
+- Système d’authentification :  
+  - Accès restreint à certaines pages (utilisateurs connectés).  
+- Affichage des messages d’erreur ou de confirmation (ex : "Réservation réussie").  
+
+---
+
+#### 3. **Technologies à Utiliser**  
+
+**Frontend :**  
+- **HTML5, CSS3, JavaScript** : pour la structure et le style.  
+- **Bootstrap** : pour un design réactif.  
+
+**Backend :**  
+- **PHP (>=8.0)** : pour la logique serveur.  
+- **PDO** : pour les interactions sécurisées avec la base de données.  
+
+**Base de données :**  
+- **MySQL** : pour le stockage des données (utilisateurs, chambres, réservations).  
+
+**Environnement de développement :**  
+- **XAMPP** (PHP, Apache, MySQL).  
+
+---
+
+#### 4. **Structure du Projet (Arborescence des Fichiers)**  
+
+```
+/hotel_project
+├── /bdd
+│   ├── bdd.php                # Connexion à la base de données
+│   ├── requetes.php           # Fonctions pour requêtes SQL
+├── /controleur
+│   ├── chambreController.php  # Gestion des chambres
+│   ├── reservationController.php # Gestion des réservations
+├── /modele
+│   ├── chambreModel.php       # Modèle pour les chambres
+│   ├── reservationModel.php   # Modèle pour les réservations
+├── /vue
+│   ├── header.php             # En-tête du site
+│   ├── footer.php             # Pied de page
+│   ├── listeChambre.php       # Page des chambres
+│   ├── detailsChambre.php     # Page des détails d’une chambre
+│   ├── reservationForm.php    # Formulaire de réservation
+├── index.php                  # Page d'accueil
+├── style.css                  # Feuille de style
+```
+
+---
+
+#### 5. **Étapes de Développement (Bêta Cornée)**  
+
+**Semaine 1 :**  
+- Configuration de l'environnement de développement.  
+- Conception du modèle de base de données (tables : `chambres`, `reservations`, `utilisateurs`).  
+- Création de la structure du projet.  
+
+**Semaine 2 :**  
+- Développement du backend :  
+  - Création des fichiers `bdd.php` et `requetes.php`.  
+  - Implémentation des fonctions CRUD pour les chambres et les réservations.  
+
+**Semaine 3 :**  
+- Développement du frontend :  
+  - Conception des pages principales avec Bootstrap.  
+  - Intégration des données dynamiques avec PHP.  
+
+**Semaine 4 :**  
+- Implémentation des fonctionnalités avancées :  
+  - Authentification des utilisateurs.  
+  - Système de gestion des réservations.  
+
+**Semaine 5 :**  
+- Tests fonctionnels et correction des bugs.  
+- Documentation du code et du projet.  
+
+---
+
+#### 6. **Exigences Fonctionnelles**  
+- Interface utilisateur facile à naviguer.  
+- Chargement rapide des pages.  
+- Respect des bonnes pratiques de sécurité (ex : mots de passe hashés, validation des entrées).  
+
+---
+
+#### 7. **Exigences Non Fonctionnelles**  
+- Compatibilité avec les navigateurs modernes (Chrome, Firefox, Edge).  
+- Design réactif (optimisé pour mobiles et tablettes).  
+
+---
+
+#### 8. **Livrables**  
+- Code source complet du projet.  
+- Documentation du projet (description des fonctionnalités, schéma de la base de données).  
+- Rapport final avec captures d’écran et détails des tests effectués.  
+
+---
+
+#### 9. **Rôles et Répartition des Tâches**  
+
+**Programmeur 1 :**  
+- Développement du backend (modèles, contrôleurs, requêtes SQL).  
+- Gestion des fonctionnalités d'administration.  
+
+**Programmeur 2 :**  
+- Développement du frontend (pages utilisateur, design, Bootstrap).  
+- Intégration des fonctionnalités dynamiques avec PHP.  
+
+---
+
+Ce cahier des charges servira de guide pour le développement et la coordination entre les deux programmeurs.
