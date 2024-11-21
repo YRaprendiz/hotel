@@ -1,0 +1,62 @@
+### **Diagramme de Cas d’Utilisation**  
+
+#### **Acteur : Administrateur (Programmeur)**  
+- **Gérer les chambres** :  
+  - Créer une chambre (ajout d’une nouvelle entrée dans la base de données).  
+  - Modifier les informations d'une chambre (type, prix, description, image).  
+  - Supprimer une chambre (supprimer une entrée de la base de données).  
+
+- **Gérer les réservations** :  
+  - Ajouter une réservation manuellement (en cas de réservation externe).  
+  - Modifier une réservation existante (dates ou client associé).  
+  - Supprimer une réservation et annulée.  
+
+- **Gérer les utilisateurs** :  
+  - Ajouter un utilisateur (client ou autre administrateur).  
+  - Modifier les informations d'un utilisateur (nom, email, mot de passe).  
+  - Supprimer un compte utilisateur.  
+
+- **Consulter les logs et statistiques** :  
+  - Vérifier les logs pour surveiller l’activité sur le site.  
+  - Accéder aux statistiques générales (revenus, taux d’occupation, etc.).  
+
+---
+
+#### **Acteur : Client (Utilisateur du site)**  
+- **Créer un compte** :  
+  - Fournir des informations personnelles (nom, prénom, email, mot de passe).  
+
+- **Se connecter** :  
+  - Accéder à son compte à l’aide de ses identifiants.  
+
+- **Réserver une chambre** :  
+  - Parcourir les chambres disponibles.  
+  - Voir les détails des chambres (photos, prix, services).  
+  - Choisir les dates d’arrivée et de départ.  
+  - Confirmer la réservation  recevoir une confirmation sur son profil.  
+
+- **Consulter ses réservations** :  
+  - Voir la liste des réservations passées et futures.  
+
+- **Annuler une réservation** :  
+  - Supprimer une réservation à venir si nécessaire.  
+
+---
+
+#### **Acteur : Gérant (Responsable de l'hôtel)**  
+- **Consulter les réservations** :  
+  - Voir la liste complète des réservations (toutes les chambres et dates).  
+  - Filtrer les réservations par chambre, date ou client.  
+
+- **Modifier les réservations** :  
+  - Changer les détails d'une réservation (dates, client associé).  
+
+- **Gérer la disponibilité des chambres** :  
+  - Désactiver temporairement une chambre en cas de maintenance.  
+  - Vérifier les chambres disponibles pour des réservations directes.  
+
+- **Générer des rapports** :  
+  - Obtenir des statistiques mensuelles ou annuelles (revenus, occupation).  
+  - Exporter des données pour des analyses externes.  
+
+---
