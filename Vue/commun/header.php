@@ -1,19 +1,19 @@
 <?php
 session_start();
 ?>
-<div>
+
+
+<div id="Menu">
+    <a href="index_accueil.php">Accueil</a>
+    <a href="chambres.php ">Chambres</a>
+    <a href="contact.php">Contact</a>
+    <div>
     <h4><?php
              if(isset($_SESSION['user']) && isset($_SESSION['user']['prenom']) && isset($_SESSION['user']['nom'])){
                 echo '<a href="profile.php" class="user-btn">' . $_SESSION['user']['prenom'] . " " . $_SESSION['user']['nom'] . '</a><br/>';}
         ?>
     </h4>
 </div>
-
-<div id="Menu">
-    <a href="index_accueil.php">Accueil</a>
-    <a href="chambres.php ">xxxxxxxx</a>
-    <a href=" ">xxxxxxxx</a>
-    <a href=" ">xxxxxxxx</a>
     <?php
     if (isset($_SESSION['user']['type'])) {
     if ($_SESSION['user']['type'] == 2) {

@@ -1,7 +1,4 @@
 <footer>
-<div id="TitleTop">
-<a href='index.php'> <img src="logo.webp" alt="accueil"></a>
-</div>
 <p>!!!!!!!</p>
 <br>
 <p>!!!!!!!</p>
