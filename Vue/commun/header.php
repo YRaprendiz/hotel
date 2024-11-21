@@ -4,7 +4,7 @@ session_start();
 
 
 <div id="Menu">
-    <a href="index_accueil.php">Accueil</a>
+    <a href="index.php">Accueil</a>
     <a href="chambres.php ">Chambres</a>
     <a href="contact.php">Contact</a>
     <div>

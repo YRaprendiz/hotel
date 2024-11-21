@@ -1,20 +1,23 @@
 hi there this is youraprendiz and in here is suposed to be a project of an aplication web named hotel ;
 Hotel/
 ├── bdd/
-│   ├── connexion.php
-│   └── requetes.php
+|   ├ Script #pour construir la base de donne
+│   └── connexion.php #pour connecter le project hotela la base de donne
 ├── controleur/
-│   ├── mainControleur.php
-│   └── chambreControleur.php
+│   ├── MainControleur.php
+|   ├── UtilisateurControleur.php
+│   └── ChambreControleur.php
 ├── modele/
-│   ├── mainModele.php
-│   └── chambreModele.php
+│   ├── MainModele.php
+│   ├── UtilisateurModele.php
+│   └── ChambreModele.php
 ├── vue/
-|    ├── header.php
-|    ├── footer.php
-|    ├── listeChambre.php
+|    ├── vue/commun
+|    |     ├── header.php #navbar pour les pages du site
+|    |     └── footer.php #footer pour les pages du site
 |    ├── detailsChambre.php
 |    └── reservationChambre.php
+├──── Chambre.php
 └──── index.php
 
 it will interract whit  this mySQL;

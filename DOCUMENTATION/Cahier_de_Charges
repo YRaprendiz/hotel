@@ -121,25 +121,25 @@ L'objectif est d'offrir une interface fonctionnelle pour les clients et une inte
 
 ```
 /hotel_project
-├── /bdd
-│   ├── bdd.php                # Connexion à la base de données
-│   ├── requetes.php           # Fonctions pour requêtes SQL
-├── /controleur
-│   ├── chambreController.php  # Gestion des chambres
-│   ├── reservationController.php # Gestion des réservations
-├── /modele
-│   ├── chambreModel.php       # Modèle pour les chambres
-│   ├── reservationModel.php   # Modèle pour les réservations
-├── /vue
-│   ├── header.php             # En-tête du site
-│   ├── footer.php             # Pied de page
-│   ├── listeChambre.php       # Page des chambres
-│   ├── detailsChambre.php     # Page des détails d’une chambre
-│   ├── reservationForm.php    # Formulaire de réservation
-├── index.php                  # Page d'accueil
-├── style.css                  # Feuille de style
-```
-
+├── bdd/
+|   ├ Script                    #pour construir la base de donne
+│   └── connexion.php           #pour connecter le project hotela la base de donne
+├── controleur/
+│   ├── MainControleur.php      # Modèle pour les chambres
+|   ├── UtilisateurControleur.php
+│   └── ChambreControleur.php
+├── modele/
+│   ├── MainModele.php          # Modèle pour les chambres
+│   ├── UtilisateurModele.php   # Modèle pour les réservations
+│   └── ChambreModele.php
+├── vue/
+|    ├── vue/commun
+|    |     ├── header.php       #En-tête et navbarr  du site
+|    |     └── footer.php       #Pied de page
+|    ├── detailsChambre.php
+|    └── reservationChambre.php
+├──── Chambre.php
+└──── index.php                 ## Page d'accueil
 ---
 
 
