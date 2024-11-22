@@ -1,11 +1,9 @@
 <?php
 session_start();
 ?>
-
-
 <div id="Menu">
     <a href="index.php">Accueil</a>
-    <a href="chambres.php ">Chambres</a>
+    <a href="chambres.php">Chambres</a>
     <a href="contact.php">Contact</a>
     <div>
     <h4><?php
