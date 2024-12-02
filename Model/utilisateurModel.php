@@ -1,63 +1,39 @@
 <?php
-
-//CRUD
-
-class Utilisateur 
+class Utilisateur
 {
-	
-	function __construct($bdd)
-	{
-		$this->bdd = $bdd;
-	}
+    private $bdd;
 
-
-	public function ajouterUtilisateur($nom, $prenom, $email)
-	{
-		$req = $this->bdd->prepare("INSERT INTO utilisateurs (Nom, Prenom, Email) VALUES (:nom , :prenom, :email)");
-		$req->bindParam(':nom', $nom);
-		$req->bindParam(':prenom', $prenom);
-		$req->bindParam(':email', $email);
-
-		return $req->execute();
-	}
-
-
-
-	public function allUtilisateur()
-	{
-		$req = $this->bdd->prepare("SELECT * FROM utilisateur");
-		$req->execute();
-		return $req->fetchAll();
-	}
-
-	public function supprimerUtilisateur($id)
-	{
-
-		$req = $this->bdd->prepare("DELETE FROM utilisateur WHERE ID_Utilisateur = ?");
-		return $req->execute([$id]);
-	}
-
-    public function updateUtilisateur($nom, $prenom, $email, $id)
+    public function __construct($bdd)
     {
-        $stmt = $this->bdd->prepare("UPDATE utilisateur SET nom = :nom, prenom = :prenom WHERE ID_Utilisateur = :id");
-        $stmt->bindParam(':nom', $nom);
-        $stmt->bindParam(':prenom', $prenom);
-        $stmt->bindParam(':id', $id);
-       return $stmt->execute();
+        $this->bdd = $bdd;
     }
 
-    public function getUtilisateurById($id) {
-        $stmt = $this->bdd->prepare('SELECT * FROM utilisateur WHERE ID_Utilisateur = ?');
-        $stmt->execute([$id]);
-        return $stmt->fetch();
+    public function ajouterUtilisateur($nom, $prenom, $email, $password)
+    {
+        try {
+            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+            $sql = "INSERT INTO utilisateurs (nom, prenom, email, password) VALUES (:nom, :prenom, :email, :password)";
+            $stmt = $this->bdd->prepare($sql);
+            $stmt->execute([
+                ':nom' => $nom,
+                ':prenom' => $prenom,
+                ':email' => $email,
+                ':password' => $passwordHash
+            ]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log erreur
+            return false;
+        }
     }
-	public function selectUtilisateur( ) {
-        $stmt = $this->bdd->prepare('select COUNT(*) AS nombre_de_Utilisateur FROM Utilisateur');
-        $stmt->execute();
-        return $stmt->fetch();
+    
+    public function connexionUtilisateur($email)
+    {
+        $stmt = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        return $stmt;
     }
+
 
 }
-
-
 ?>
