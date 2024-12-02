@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 ?>
@@ -5,6 +6,7 @@ session_start();
     <a href="index.php">Accueil</a>
     <a href="chambres.php">Chambres</a>
     <a href="contact.php">Contact</a>
+    
     <div>
     <h4><?php
              if(isset($_SESSION['user']) && isset($_SESSION['user']['prenom']) && isset($_SESSION['user']['nom'])){
