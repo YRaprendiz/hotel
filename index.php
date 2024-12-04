@@ -21,12 +21,20 @@ switch ($page) {
     case 'inscription':
         include('vue/inscription.php');
         break;
+        
     case 'login':
         include('vue/login.php');
         break;
+
     case 'chambres':        // Ta logique pour afficher les chambres
         include('vue/chambre/listeChambres.php');
         break;
+    
+    case 'contact':
+        include('vue/contact.php');
+        break;
+
+
 
         
 
