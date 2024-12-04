@@ -16,7 +16,7 @@
                 <a href="index.php?route=reservation">Réservations</a>
                 <a href="index.php?route=deconnexion">Déconnexion</a>
             <?php else: ?>
-                <a href="index.php?route=utilisateur/ajouterUtilisateur">Login</a>
+                <a href="../utilisateur/login">Login</a>
             <?php endif; ?>
         </ul>
     </nav>
