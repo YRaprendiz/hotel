@@ -1,13 +1,11 @@
 <?php
 include('../modele/utilisateurModele.php');
-include("../bdd/connexion.php");
+include('../bdd/connexion.php');
 
 if (isset($_POST['action'])) {
-
     $utilisateurController = new UtilisateurController($bdd);
 
     switch ($_POST['action']) {
-
         case 'ajouter':
             $utilisateurController->ajouter();
             break;
@@ -18,7 +16,8 @@ if (isset($_POST['action'])) {
 
         default:
             // Aucune action correspondante
-            break;
+            header("Location: ../index.php?error=invalid_action");
+            exit;
     }
 }
 
@@ -26,20 +25,20 @@ class UtilisateurController
 {
     private $utilisateur;
 
-    function __construct($bdd)
+    public function __construct($bdd)
     {
         $this->utilisateur = new Utilisateur($bdd);
     }
 
     public function ajouter()
     {
-        // Vérification des champs
+        // Vérification des champs obligatoires
         if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['email']) || empty($_POST['password'])) {
-            header('Location: http://127.0.0.1/hotel/vue/utilisateur/ajouterUtilisateur.php?error=1');
+            header('Location: ../vue/utilisateur/ajouterUtilisateur.php?error=missing_fields');
             exit;
         }
 
-        // Ajouter l'utilisateur
+        // Ajout de l'utilisateur
         $result = $this->utilisateur->ajouterUtilisateur(
             $_POST['nom'],
             $_POST['prenom'],
@@ -48,27 +47,34 @@ class UtilisateurController
         );
 
         if ($result) {
-            header('Location: http://127.0.0.1/hotel/vue/utilisateur/ajouterUtilisateur.php?success=1');
+            header('Location: ../vue/utilisateur/ajouterUtilisateur.php?success=1');
         } else {
-            header('Location: http://127.0.0.1/hotel/vue/utilisateur/ajouterUtilisateur.php?error=2');
+            header('Location: ../vue/utilisateur/ajouterUtilisateur.php?error=email_taken');
         }
     }
+
     public function connexion()
     {
+        // Vérification des champs obligatoires
         if (empty($_POST['email']) || empty($_POST['password'])) {
-            header("Location: ../vue/utilisateur/login.php?error=fields");
+            header('Location: ../vue/utilisateur/login.php?error=missing_fields');
             exit;
         }
 
-        // Vérification de l'existence de l'utilisateur
-        $stmt = $this->utilisateur->connexionUtilisateur($_POST['email']);
-        $user = $stmt->fetch();
+        // Vérification des informations d'identification
+        $user = $this->utilisateur->connexionUtilisateur($_POST['email']);
 
-        if ($user && password_verify($_POST['password'], $user['password'])) {
-            $_SESSION['user'] = $user;
-            header("Location: ../index.php");
+        if ($user && password_verify($_POST['password'], $user['mot_de_passe'])) {
+            session_start();
+            $_SESSION['user'] = [
+                'id_utilisateur' => $user['id_utilisateur'],
+                'nom' => $user['nom'],
+                'email' => $user['email'],
+                'type' => $user['type']
+            ];
+            header('Location: ../index.php');
         } else {
-            header("Location: ../vue/utilisateur/login.php?error=wrong_credentials");
+            header('Location: ../vue/utilisateur/login.php?error=invalid_credentials');
         }
     }
 }

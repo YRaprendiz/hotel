@@ -1,0 +1,105 @@
+Le projet 'hotel' consiste à développer un site web dynamique pour un hôtel fictif, permettant de gérer les chambres, les réservations et d’offrir des informations aux clients. Le site devra inclure une interface utilisateur intuitive et des fonctionnalités adaptées pour les utilisateurs (clients et administrateurs). sur localhost Xampp et MySQL comme base de donne
+
+L'objectif est d'appliquer les compétences acquises en développement web, bases de données et gestion de projet dans un environnement réaliste.  
+Le projet consiste à développer une application web de gestion d'hôtel pour un établissement fictif, **Hotel**. Cette application permettra de :
+1. Consulter les chambres disponibles (avec leurs caractéristiques, prix et services associés).
+2. Gérer les réservations (par les clients ou par l'administration).
+3. Administrer les utilisateurs (gestion des clients et administrateurs).
+4. Afficher des statistiques simples pour l’administrateur (taux d’occupation, revenus mensuels, etc.).
+arborecent du mon code actuelle:
+/hotel
+├── /bdd
+│   └──connexion.php
+│
+├── /controleur
+│   ├──chambreControleur.php
+│   ├──selectAllUtilisateur.php
+│   └──utilisateurController.php
+│
+├── /model
+│   ├──chambreModele.php
+│   └──utilisateurModel.php
+│
+├── /vue
+├── /commun
+│   ├── header.php
+│   └── footer.php
+└──index.php #page Accueil
+
+' connexion.php'
+<?php try{$user = "root";$pass = "";$connexion = new PDO('mysql:host=localhost;dbname=hotel_claude', $user, $pass); }catch(PDOException $e){print "Erreur! Échec de la connexion:" . $e->getMessage() ."<br/>";die();}?>
+' controleur.php'
+
+' utilisateurmodel.php'
+<?php
+class Utilisateur
+{
+    private $bdd;
+
+    public function __construct($bdd)
+    {
+        $this->bdd = $bdd;
+    }
+
+    public function ajouterUtilisateur($nom, $prenom, $email, $password)
+    {
+        try {
+            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+            $sql = "INSERT INTO utilisateurs (nom, prenom, email, password) VALUES (:nom, :prenom, :email, :password)";
+            $stmt = $this->bdd->prepare($sql);
+            $stmt->execute([
+                ':nom' => $nom,
+                ':prenom' => $prenom,
+                ':email' => $email,
+                ':password' => $passwordHash
+            ]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log erreur
+            return false;
+        }
+    }
+    
+    public function connexionUtilisateur($email)
+    {
+        $stmt = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        return $stmt;
+    }
+
+
+}
+?>
+
+' header.php'
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>        
+        <ul>
+            <a href="index.php">Accueil</a>
+            <a href="index.php?route=chambres">Chambres</a>
+            <a href="index.php?route=contact">Contact</a>
+            <?php if (isset($_SESSION['utilisateur'])): echo $_SESSION['utilisateur']['prenom'] . " " . $_SESSION['utilisateur']['nom']?>
+                <a href="index.php?route=profil">Mon Profil</a>
+                <a href="index.php?route=reservation">Réservations</a>
+                <a href="index.php?route=deconnexion">Déconnexion</a>
+            <?php else: ?>
+                <a href="../utilisateur/login">Login</a>
+            <?php endif; ?>
+        </ul>
+    </nav>
+' footer.php'
+<footer>
+<br>
+<p>!!!FOOTER!!!!</p>
+<br>
+<p>&copy; 2023 Hotel. Tous droits réservés.</p>
+</footer>
+</body>
+</html>

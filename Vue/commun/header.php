@@ -6,17 +6,19 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav>        
+
+    <nav>
         <ul>
             <a href="index.php">Accueil</a>
-            <a href="index.php?route=chambres">Chambres</a>
-            <a href="index.php?route=contact">Contact</a>
-            <?php if (isset($_SESSION['utilisateur'])): echo $_SESSION['utilisateur']['prenom'] . " " . $_SESSION['utilisateur']['nom']?>
-                <a href="index.php?route=profil">Mon Profil</a>
-                <a href="index.php?route=reservation">Réservations</a>
-                <a href="index.php?route=deconnexion">Déconnexion</a>
+            <a href="index.php?page=chambres">Chambres</a>
+            <a href="index.php?page=contact">Contact</a>
+            <?php if (isset($_SESSION['utilisateur'])): ?>
+                <a href="index.php?page=profil">Mon Profil</a>
+                <a href="index.php?page=reservation">Réservations</a>
+                <a href="index.php?page=deconnexion">Déconnexion</a>
             <?php else: ?>
-                <a href="../utilisateur/login">Login</a>
+                <a href="index.php?page=inscription">Inscription</a>
+                <a href="index.php?page=login">Connexion</a>
             <?php endif; ?>
         </ul>
     </nav>
