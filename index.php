@@ -19,11 +19,11 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'accueil';
 
 switch ($page) {
     case 'inscription':
-        include('vue/inscription.php');
+        include('vue/utilisateur/inscription.php');
         break;
         
     case 'login':
-        include('vue/login.php');
+        include('vue/utilisateur/login.php');
         break;
 
     case 'chambres':        // Ta logique pour afficher les chambres
