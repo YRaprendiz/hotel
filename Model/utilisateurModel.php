@@ -29,7 +29,7 @@ class Utilisateur
 
     public function ajouterUtilisateur($nom, $prenom, $email)
 	{
-		$req = $this->bdd->prepare("INSERT INTO utilisateurs (Nom, Prenom, Email) VALUES (:nom , :prenom, :email)");
+		$req = $this->bdd->prepare("INSERT INTO utilisateurs (Nom, , Email) VALUES (:nom , :prenom, :email)");
 		$req->bindParam(':nom', $nom);
 		$req->bindParam(':prenom', $prenom);
 		$req->bindParam(':email', $email);

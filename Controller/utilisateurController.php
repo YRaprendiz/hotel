@@ -16,13 +16,12 @@ if (isset($_POST['action'])) {
         $utilisateurController->delete();
             break;  
 
-
-        case 'ajouter':
-            $utilisateurController->ajouter();
-            break;
-
         case 'connexion':
             $utilisateurController->connexion();
+            break;
+
+        case 'inscritpion':
+            $utilisateurController->inscritpion();
             break;
 
         default:
@@ -40,7 +39,7 @@ class UtilisateurController
         $this->utilisateur = new Utilisateur($connexion);
     }
 
-    public function ajouter()
+    public function inscritpion()
     {
         // Vérification des champs obligatoires
         if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['email']) || empty($_POST['password'])) {
@@ -53,11 +52,16 @@ class UtilisateurController
             $_POST['nom'],
             $_POST['prenom'],
             $_POST['email'],
-            $_POST['password']
+            $_POST['password'],
+            $_POST['telephone']
         );
+
+        var_dump($result);
+        die();
 
         if ($result) {
             header('Location: ../vue/utilisateur/inscription.php?success=1');
+            echo ('success!!!');
         } else {
             echo ('erro de inscription');
             header('Location: ../vue/utilisateur/inscription.php?error=email_taken');
