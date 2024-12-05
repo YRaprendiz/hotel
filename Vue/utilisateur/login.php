@@ -1,11 +1,11 @@
 
     <div class="login-page">
         <div class="form">
-            <form class="login-form" method="POST" action="../controleur/UtilisateurControleur.php">
+            <form class="login-form" method="POST" action="Controller/utilisateurController.php">
                 <input type="email"     name="email"    placeholder="Email" required />
                 <input type="password"  name="password" placeholder="Mot de passe" required />
                 <button type="submit"   name="action"   value="connexion">Se connecter</button>
-                <i class="message">Pas encore inscrit ? <a href="./inscription.php">Créez un compte</a></i>
+                <i class="message">Pas encore inscrit ? <a href="./login.php">Créez un compte</a></i>
             </form>
         </div>
     </div>

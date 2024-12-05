@@ -76,9 +76,14 @@ class Utilisateur
 
     public function connexionUtilisateur($email)
     {
+
         $stmt = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE email = :email");
         $stmt->execute(['email' => $email]);
-        return $stmt;
+
+       // var_dump($stmt->fetch());
+       // die;
+        return $stmt->fetch();
+
     }
 
 

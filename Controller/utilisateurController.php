@@ -1,10 +1,11 @@
 <?php
 session_start();
-include('../modele/utilisateurModele.php');
+include('../model/utilisateurModel.php');
 include('../bdd/connexion.php');
 
+
 if (isset($_POST['action'])) {
-    $utilisateurController = new UtilisateurController($bdd);
+    $utilisateurController = new UtilisateurController($connexion);
 
     switch ($_POST['action']) {
         case 'ajouter':
@@ -34,9 +35,9 @@ class UtilisateurController
 {
     private $utilisateur;
 
-    public function __construct($bdd)
+    public function __construct($connexion)
     {
-        $this->utilisateur = new Utilisateur($bdd);
+        $this->utilisateur = new Utilisateur($connexion);
     }
 
     public function ajouter()
@@ -58,7 +59,9 @@ class UtilisateurController
         if ($result) {
             header('Location: ../vue/utilisateur/inscription.php?success=1');
         } else {
+            echo ('erro de inscription');
             header('Location: ../vue/utilisateur/inscription.php?error=email_taken');
+
         }
     }
 
@@ -73,7 +76,19 @@ class UtilisateurController
         // Vérification des informations d'identification
         $user = $this->utilisateur->connexionUtilisateur($_POST['email']);
 
-        if ($user && password_verify($_POST['password'], $user['mot_de_passe'])) {
+       // var_dump($user);
+        //die();
+
+      //  var_dump($_POST['password']);
+      //  var_dump($user['password']);
+
+       // var_dump($_POST['password'] == $user['password']);
+       // die;
+
+        if ($user && $_POST['password'] == $user['password']) {
+
+            //var_dump("je rentre dedans");
+            //die;
             session_start();
             $_SESSION['user'] = [
                 'id_utilisateur' => $user['id_utilisateur'],
@@ -83,6 +98,7 @@ class UtilisateurController
             ];
             header('Location: ../index.php');
         } else {
+            //http://localhost/GitYR/hotel/index.php?page=login
             header('Location: ../vue/utilisateur/login.php?error=invalid_credentials');
         }
     }
