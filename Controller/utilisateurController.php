@@ -8,6 +8,15 @@ if (isset($_POST['action'])) {
 
     switch ($_POST['action']) {
         case 'ajouter':
+            $utilisateurController->create();
+               break;
+   
+        case 'supprimer':
+        $utilisateurController->delete();
+            break;  
+
+
+        case 'ajouter':
             $utilisateurController->ajouter();
             break;
 
@@ -17,7 +26,6 @@ if (isset($_POST['action'])) {
 
         default:
             // Aucune action correspondante
-            header("Location: ../index.php?error=invalid_action");
             exit;
     }
 }
@@ -35,7 +43,7 @@ class UtilisateurController
     {
         // Vérification des champs obligatoires
         if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['email']) || empty($_POST['password'])) {
-            header('Location: ../vue/utilisateur/ajouterUtilisateur.php?error=missing_fields');
+            header('Location: ../vue/utilisateur/inscription.php?error=missing_fields');
             exit;
         }
 
@@ -48,9 +56,9 @@ class UtilisateurController
         );
 
         if ($result) {
-            header('Location: ../vue/utilisateur/ajouterUtilisateur.php?success=1');
+            header('Location: ../vue/utilisateur/inscription.php?success=1');
         } else {
-            header('Location: ../vue/utilisateur/ajouterUtilisateur.php?error=email_taken');
+            header('Location: ../vue/utilisateur/inscription.php?error=email_taken');
         }
     }
 
