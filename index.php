@@ -1,6 +1,8 @@
 <?php include("./vue/commun/header.php"); ?>
 
 <?php
+// Système de routage simple pour naviguer entre les pages
+
 // Récupération du paramètre 'page' dans l'URL, valeur par défaut : 'accueil'
 $page = isset($_GET['page']) ? $_GET['page'] : 'accueil';
 

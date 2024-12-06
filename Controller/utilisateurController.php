@@ -34,7 +34,7 @@ class UtilisateurController
         $this->utilisateur = new Utilisateur($connexion);
     }
 
-    public function inscritpion()
+    public function inscription()
     {
         // Vérification des champs obligatoires
         if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['email']) || empty($_POST['password'])) {
@@ -94,51 +94,6 @@ class UtilisateurController
             exit;
         }
     }
-
-    public function delete()
-    {
-        if (empty($_POST['id'])) {
-            header('Location: ../vue/utilisateur/list.php?error=missing_id');
-            exit;
-        }
-
-        $result = $this->utilisateur->supprimerUtilisateur($_POST['id']);
-
-        if ($result) {
-            header('Location: ../vue/utilisateur/list.php?success=deleted');
-        } else {
-            header('Location: ../vue/utilisateur/list.php?error=delete_failed');
-        }
-    }
-
-    public function create()
-    {
-        if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['telephone'])) {
-            header('Location: ../vue/utilisateur/create.php?error=missing_fields');
-            exit;
-        }
-
-        $result = $this->utilisateur->ajouterUtilisateur(
-            $_POST['nom'],
-            $_POST['prenom'],
-            $_POST['email'],
-            $_POST['password'],
-            $_POST['telephone']
-        );
-
-        if ($result) {
-            header('Location: ../vue/utilisateur/create.php?success=1');
-        } else {
-            header('Location: ../vue/utilisateur/create.php?error=email_taken');
-        }
-    }
-
-
-
-
-
-
-
-
+    
 }
 ?>
