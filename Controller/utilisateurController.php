@@ -10,23 +10,18 @@ if (isset($_POST['action'])) {
     switch ($_POST['action']) {
         case 'ajouter':
             $utilisateurController->create();
-               break;
-   
+            break;
         case 'supprimer':
-        $utilisateurController->delete();
-            break;  
-
+            $utilisateurController->delete();
+            break;
         case 'connexion':
             $utilisateurController->connexion();
             break;
-
-        case 'inscritpion':
-            $utilisateurController->inscritpion();
+        case 'inscription':
+            $utilisateurController->inscription();
             break;
-
         default:
-            // Aucune action correspondante
-            exit;
+            exit; // Action non reconnue
     }
 }
 
@@ -56,16 +51,15 @@ class UtilisateurController
             $_POST['telephone']
         );
 
-        var_dump($result);
-        die();
+        //var_dump($result);
+        //die();
 
         if ($result) {
             header('Location: ../vue/utilisateur/inscription.php?success=1');
-            echo ('success!!!');
+            exit;
         } else {
-            echo ('erro de inscription');
             header('Location: ../vue/utilisateur/inscription.php?error=email_taken');
-
+            exit;
         }
     }
 
@@ -78,33 +72,73 @@ class UtilisateurController
         }
 
         // Vérification des informations d'identification
-        $user = $this->utilisateur->connexionUtilisateur($_POST['email']);
+        $user = $this->utilisateur->connexionUtilisateur($_POST['email'], $_POST['password']);
+/** var_dump($user);
+    *die();
+    *var_dump($_POST['password']);
+    *var_dump($user['password']);
+    *var_dump($_POST['password'] == $user['password']);
+    *die;*/
 
-       // var_dump($user);
-        //die();
-
-      //  var_dump($_POST['password']);
-      //  var_dump($user['password']);
-
-       // var_dump($_POST['password'] == $user['password']);
-       // die;
-
-        if ($user && $_POST['password'] == $user['password']) {
-
-            //var_dump("je rentre dedans");
-            //die;
-            session_start();
+        if ($user) {
+            // Stockage des informations dans la session
             $_SESSION['user'] = [
                 'id_utilisateur' => $user['id_utilisateur'],
                 'nom' => $user['nom'],
                 'email' => $user['email'],
-                'type' => $user['type']
+                'type' => $user['type'] ?? 'utilisateur' // Type par défaut si absent
             ];
-            header('Location: ../index.php');
+            header('Location: ../index.php'); // Redirection après connexion réussie
         } else {
-            //http://localhost/GitYR/hotel/index.php?page=login
             header('Location: ../vue/utilisateur/login.php?error=invalid_credentials');
+            exit;
         }
     }
+
+    public function delete()
+    {
+        if (empty($_POST['id'])) {
+            header('Location: ../vue/utilisateur/list.php?error=missing_id');
+            exit;
+        }
+
+        $result = $this->utilisateur->supprimerUtilisateur($_POST['id']);
+
+        if ($result) {
+            header('Location: ../vue/utilisateur/list.php?success=deleted');
+        } else {
+            header('Location: ../vue/utilisateur/list.php?error=delete_failed');
+        }
+    }
+
+    public function create()
+    {
+        if (empty($_POST['nom']) || empty($_POST['prenom']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['telephone'])) {
+            header('Location: ../vue/utilisateur/create.php?error=missing_fields');
+            exit;
+        }
+
+        $result = $this->utilisateur->ajouterUtilisateur(
+            $_POST['nom'],
+            $_POST['prenom'],
+            $_POST['email'],
+            $_POST['password'],
+            $_POST['telephone']
+        );
+
+        if ($result) {
+            header('Location: ../vue/utilisateur/create.php?success=1');
+        } else {
+            header('Location: ../vue/utilisateur/create.php?error=email_taken');
+        }
+    }
+
+
+
+
+
+
+
+
 }
 ?>
