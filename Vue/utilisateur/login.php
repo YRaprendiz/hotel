@@ -1,4 +1,4 @@
-
+<?php include_once("./vue/commun/header.php"); ?>
     <div class="login-page">
         <div class="form">
             <form class="login-form" method="POST" action="Controller/utilisateurController.php">
@@ -18,3 +18,4 @@
         <p style="color:red;">Email ou mot de passe incorrect.</p>
     <?php endif; ?>
 <?php endif; ?>
+<?php include_once("./vue/commun/footer.php"); ?>
