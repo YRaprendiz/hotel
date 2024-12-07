@@ -1,5 +1,17 @@
-J'essaie de comprendre ce qui se passe dans mon projet avec un script SQL et un contrôleur de modèle de vue Code methpd, car la base de données SQL n'accepte pas les commandes d'insertion
+J'essaie de comprendre ce qui se passe dans mon projet avec un script SQL et un contrôleur de modèle de vue Code method, car la base de données SQL n'accepte pas les commandes d'insertion
 Pour éviter de futurs problèmes, modifiez tous les liens pour qu'ils soient liés à l'index $page = isset($_GET['page']) ? $_GET['page'] : 'accueil';
+
+CREATE TABLE UTILISATEURS (
+    id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
+    type VARCHAR(50) NOT NULL DEFAULT 'utilisateur',
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    telephone VARCHAR(20)
+);
+
+
  /bdd/connexion.php<?php try{$user = "root";$pass = "";$connexion = new PDO('mysql:host=localhost;dbname=hotel_claude', $user, $pass); }catch(PDOException $e){print "Erreur! Échec de la connexion:" . $e->getMessage() ."<br/>";die();}?>
 /controleur/utilisateurController.php
  <?php

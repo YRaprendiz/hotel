@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?phpsession_start();?>
 
 <!DOCTYPE html>
 <html lang="fr">

@@ -12,7 +12,7 @@ if (isset($_POST['action'])) {
             $utilisateurController->create();
             break;
         case 'supprimer':
-            $utilisateurController->delete();
+            $utilisateurController->supprimerUtilisateur();
             break;
         case 'connexion':
             $utilisateurController->connexion();
