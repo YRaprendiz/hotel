@@ -1,158 +1,20 @@
-Le projet 'hotel' consiste à développer un site web dynamique pour un hôtel fictif, permettant de gérer les chambres, les réservations et d’offrir des informations aux clients. Le site devra inclure une interface utilisateur intuitive et des fonctionnalités adaptées pour les utilisateurs (clients et administrateurs). sur localhost Xampp et MySQL comme base de donne
+Rendre ce texte d'instructions plus compréhensible mais toujour dans le format de paragraph: "Créez un projet web avec deux types d'utilisateurs : administrateurs et clients. Le projet doit inclure une barre de navigation (navbar) contenant les pages suivantes : Index, Accueil, Profil/Tous les utilisateurs, Inscription, et Connexion. Le projet doit être conçu selon le modèle MVC (Modèle-Vue-Contrôleur). Lorsqu'un utilisateur s'inscrit via la page Inscription et se connect via la page connection, ses informations doivent être enregistrées dans une base de données SQL (hébergée sur un serveur local Apache) appelée "hotel". Sur la page Connexion, un utilisateur peut se connecter en utilisant son email et son mot de passe. Une fois connecté, si l'utilisateur est un client, il sera redirigé vers une page Profil où il pourra modifier ses propres informations. Si l'utilisateur est un administrateur, il accédera à une page Tous les utilisateurs qui affichera, via une requête SQL, une liste de tous les utilisateurs. Depuis cette page, l'administrateur pourra également modifier les informations des utilisateurs dans la base de données. Si leutilisateur est connecté, un bouton Déconnexion doit être affiché dans la navbar pour posibiliter la deconection du admin ou utilisateur. Enfin, la page Accueil doit présenter une image de l'hôtel ainsi que la barre de navigation. la page index de ce project doit gerrer tout les adressage de page de cet project , project droit contenir bootstrap"
 
-L'objectif est d'appliquer les compétences acquises en développement web, bases de données et gestion de projet dans un environnement réaliste.  
-Le projet consiste à développer une application web de gestion d'hôtel pour un établissement fictif, **Hotel**. Cette application permettra de :
-1. Consulter les chambres disponibles (avec leurs caractéristiques, prix et services associés).
-2. Gérer les réservations (par les clients ou par l'administration).
-3. Administrer les utilisateurs (gestion des clients et administrateurs).
-4. Afficher des statistiques simples pour l’administrateur (taux d’occupation, revenus mensuels, etc.).
-arborecent du mon code actuelle:
-/hotel
-├── /bdd
-│   └──connexion.php
-│
-├── /controleur
-│   ├──chambreControleur.php
-│   ├──selectAllUtilisateur.php
-│   └──utilisateurController.php
-│
-├── /model
-│   ├──chambreModele.php
-│   └──utilisateurModel.php
-│
-├── /vue
-├── /commun
-│   ├── header.php
-│   └── footer.php
-└──index.php #page Accueil
+Voici une version plus claire et fluide de vos instructions tout en conservant leur format paragraphe :Créez un projet web intégrant deux types d'utilisateurs : administrateurs et clients. Ce projet doit comporter une barre de navigation (navbar) qui inclut les pages suivantes : Index, Accueil, Profil/Tous les utilisateurs, Inscription et Connexion. Le développement doit suivre le modèle MVC (Modèle-Vue-Contrôleur). Lorsqu'un utilisateur s'inscrit via la page Inscription, ses informations doivent être enregistrées dans une base de données SQL appelée "hotel", hébergée sur un serveur local Apache. Une fois inscrit, l'utilisateur peut se connecter via la page Connexion en utilisant son email et son mot de passe.Après la connexion, le comportement dépend du rôle de l'utilisateur : un client est redirigé vers une page Profil où il peut modifier ses informations personnelles, tandis qu'un administrateur accède à une page Tous les utilisateurs. Cette page affiche une liste de tous les utilisateurs via une requête SQL, et l'administrateur peut également y modifier les informations des utilisateurs enregistrées dans la base de données. Pour les utilisateurs connectés (client ou administrateur), un bouton Déconnexion doit apparaître dans la navbar pour permettre la déconnexion.La page Accueil doit présenter une image de l'hôtel et inclure la barre de navigation, tandis que la page Index doit centraliser la gestion des adresses et redirections des différentes pages du projet. Enfin, l'utilisation de Bootstrap est recommandée pour le design et la mise en page.
 
-' connexion.php'
-<?php try{$user = "root";$pass = "";$connexion = new PDO('mysql:host=localhost;dbname=hotel_claude', $user, $pass); }catch(PDOException $e){print "Erreur! Échec de la connexion:" . $e->getMessage() ."<br/>";die();}?>
-' controleur.php'
-
-' utilisateurmodel.php'
-<?php
-class Utilisateur
-{
-    private $bdd;
-
-    public function __construct($bdd)
-    {
-        $this->bdd = $bdd;
-    }
-
-    public function ajouterUtilisateur2($nom, $prenom, $email, $password)
-    {
-        try {
-            $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-            $sql = "INSERT INTO utilisateurs (nom, prenom, email, password) VALUES (:nom, :prenom, :email, :password)";
-            $stmt = $this->bdd->prepare($sql);
-            $stmt->execute([
-                ':nom' => $nom,
-                ':prenom' => $prenom,
-                ':email' => $email,
-                ':password' => $passwordHash
-            ]);
-            return $stmt->rowCount() > 0;
-        } catch (PDOException $e) {
-            // Log erreur
-            return false;
-        }
-    }
-
-    public function ajouterUtilisateur($nom, $prenom, $email)
-	{
-		$req = $this->bdd->prepare("INSERT INTO utilisateurs (Nom, , Email) VALUES (:nom , :prenom, :email)");
-		$req->bindParam(':nom', $nom);
-		$req->bindParam(':prenom', $prenom);
-		$req->bindParam(':email', $email);
-
-		return $req->execute();
-	}
+📁 hotel-management/
+├── 📁 config/
+├── 📁 controllers/
+├── 📁 models/
+├── 📁 views/
+├── 📁 public/
+│   ├── 📁 css/
+│   ├── 📁 js/
+│   └── 📁 images/
+├── 📁 includes/
+└── 📄 index.php
 
 
 
-	public function allUtilisateur()
-	{
-		$req = $this->bdd->prepare("SELECT * FROM utilisateurs");
-		$req->execute();
-		return $req->fetchAll();
-	}
-
-	public function supprimerUtilisateur($id)
-	{
-
-		$req = $this->bdd->prepare("DELETE FROM utilisateurs WHERE ID_Utilisateur = ?");
-		return $req->execute([$id]);
-	}
-
-    public function updateUtilisateur($nom, $prenom, $email, $id)
-    {
-        $stmt = $this->bdd->prepare("UPDATE utilisateurs SET nom = :nom, prenom = :prenom WHERE ID_Utilisateurs = :id");
-        $stmt->bindParam(':nom', $nom);
-        $stmt->bindParam(':prenom', $prenom);
-        $stmt->bindParam(':id', $id);
-       return $stmt->execute();
-    }
-
-    public function getUtilisateurById($id) {
-        $stmt = $this->bdd->prepare('SELECT * FROM utilisateurs WHERE ID_Utilisateur = ?');
-        $stmt->execute([$id]);
-        return $stmt->fetch();
-    }
-	public function selectUtilisateur( ) {
-        $stmt = $this->bdd->prepare('select COUNT(*) AS nombre_de_Utilisateur FROM Utilisateur');
-        $stmt->execute();
-        return $stmt->fetch();
-    }       
 
 
-    public function connexionUtilisateur($email)
-    {
-
-        $stmt = $this->bdd->prepare("SELECT * FROM utilisateurs WHERE email = :email");
-        $stmt->execute(['email' => $email]);
-
-       // var_dump($stmt->fetch());
-       // die;
-        return $stmt->fetch();
-
-    }
-
-
-}
-?>
-
-
-' header.php'
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Hotel</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <nav>        
-        <ul>
-            <a href="index.php">Accueil</a>
-            <a href="index.php?route=chambres">Chambres</a>
-            <a href="index.php?route=contact">Contact</a>
-            <?php if (isset($_SESSION['utilisateur'])): echo $_SESSION['utilisateur']['prenom'] . " " . $_SESSION['utilisateur']['nom']?>
-                <a href="index.php?route=profil">Mon Profil</a>
-                <a href="index.php?route=reservation">Réservations</a>
-                <a href="index.php?route=deconnexion">Déconnexion</a>
-            <?php else: ?>
-                <a href="../utilisateur/login">Login</a>
-            <?php endif; ?>
-        </ul>
-    </nav>
-' footer.php'
-<footer>
-<br>
-<p>!!!FOOTER!!!!</p>
-<br>
-<p>&copy; 2023 Hotel. Tous droits réservés.</p>
-</footer>
-</body>
-</html>
