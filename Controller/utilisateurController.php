@@ -1,24 +1,22 @@
 <?php
 session_start();
-include('../model/utilisateurModel.php');
 include('../bdd/connexion.php');
+include('../modele/utilisateurModele.php');
+include('./authController.php');
 
 
 if (isset($_POST['action'])) {
-    $utilisateurController = new UtilisateurController($connexion);
+    $utilisateurController = new UtilisateurController($connexion_hc);
 
     switch ($_POST['action']) {
         case 'ajouter':
-            $utilisateurController->create();
-            break;
-        case 'supprimer':
-            $utilisateurController->supprimerUtilisateur();
+            $utilisateurController->();
             break;
         case 'connexion':
-            $utilisateurController->connexion();
+            $utilisateurController->connexion_hc();
             break;
-        case 'inscription':
-            $utilisateurController->inscription();
+        case 'register':
+            $utilisateurController->();
             break;
         default:
             exit; // Action non reconnue
@@ -29,9 +27,9 @@ class UtilisateurController
 {
     private $utilisateur;
 
-    public function __construct($connexion)
+    public function __construct($connexion_hc)
     {
-        $this->utilisateur = new Utilisateur($connexion);
+        $this->utilisateur = new Utilisateur($connexion_hc);
     }
 
     public function inscription()
@@ -43,42 +41,39 @@ class UtilisateurController
         }
 
         // Ajout de l'utilisateur
-        $result = $this->utilisateur->ajouterUtilisateur(
+        $result = $this->utilisateur->register(
             $_POST['nom'],
             $_POST['prenom'],
             $_POST['email'],
-            $_POST['password'],
-            $_POST['telephone']
+            $_POST['pass'],
+            $_POST['adress']
         );
 
         //var_dump($result);
         //die();
 
         if ($result) {
-            header('Location: ../vue/utilisateur/inscription.php?success=1');
+            header('Location: ../vue/utilisateur/register.php?success=1');
+            echo('incription reussi ! !');
             exit;
         } else {
-            header('Location: ../vue/utilisateur/inscription.php?error=email_taken');
+            header('Location: ../vue/utilisateur/register.php?error=email_taken');
             exit;
         }
     }
 
-    public function connexion()
+    public function connexion_hc()
     {
         // Vérification des champs obligatoires
-        if (empty($_POST['email']) || empty($_POST['password'])) {
+        if (empty($_POST['email']) || empty($_POST['pass'])) {
             header('Location: ../vue/utilisateur/login.php?error=missing_fields');
             exit;
         }
 
         // Vérification des informations d'identification
-        $user = $this->utilisateur->connexionUtilisateur($_POST['email'], $_POST['password']);
-/** var_dump($user);
-    *die();
-    *var_dump($_POST['password']);
-    *var_dump($user['password']);
-    *var_dump($_POST['password'] == $user['password']);
-    *die;*/
+        $user = $this->utilisateur->login($_POST['email'],$_POST['pass']);
+        var_dump($user);
+        die();
 
         if ($user) {
             // Stockage des informations dans la session
