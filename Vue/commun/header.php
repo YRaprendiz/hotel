@@ -6,11 +6,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hotel</title>
     <!-- Ajout de Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="images/favicon.ico">
 </head>
 <body>
 
@@ -23,24 +20,34 @@ session_start();
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">                        
+                    <ul class="navbar-nav"> 
+                    <li class="nav-item">
+                            <a class="nav-link" href="index.php?page=chambres">nos chambres</a>
+                        </li>                       
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?page=inscription">Inscription</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php?page=login">Connexion</a>
                         </li>
-                        
+                        <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=contact">Contact</a>
+                            </li>
                         <!-- Afficher uniquement si l'utilisateur est connecté -->
                         <?php if (isset($_SESSION['utilisateur'])): ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php?page=chambres">Chambres</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="index.php?page=contact">Contact</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="logout.php">Déconnexion</a>
+                            </li>
+                            <?php elseif (isset($_SESSION['utilisateur'])&& ($_SESSION['role']==['admin'])): ?>
+                                <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=toutsClients">toutsClients</a>
+                            </li>
+                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.php?page=toutsChambres">toutsChambres</a>
                             </li>
                         <?php endif; ?>
                     </ul>

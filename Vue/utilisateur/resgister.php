@@ -48,6 +48,10 @@
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="form-group">
+                <label for="adress">adress</label>
+                <input type="adress" class="form-control" id="adress" name="adress">
+            </div>
+            <div class="form-group">
                 <label for="telephone">Numéro de téléphone</label>
                 <input type="tel" class="form-control" id="telephone" name="telephone">
             </div>

@@ -1,3 +1,21 @@
+<?php
+// Fichier principal de routage
+session_start();
+include("./bdd/connexion.php");
+include("./controller/authController.php");
+
+// Redirection vers la page appropriée
+if (AuthController::isLoggedIn()) {
+    if (AuthController::isAdmin()) {
+        header("Location: users-list.php");
+    } else {
+        header("Location: profile.php");
+    }
+} else {
+    header("Location: home.php");
+}
+exit();
+?>
 <?php include("./vue/commun/header.php"); ?>
 
 <?php
@@ -7,8 +25,8 @@
 $page = isset($_GET['page']) ? $_GET['page'] : 'accueil';
 
 switch ($page) {
-    case 'inscription':
-        include('vue/utilisateur/inscription.php');
+    case 'resgister':
+        include('vue/utilisateur/resgister.php');
         break;
 
     case 'login':
@@ -36,7 +54,7 @@ switch ($page) {
         
 
     default:
-        include('vue/accueil.php');
+        include('vue/home.php');
         break;
 }
 ?>

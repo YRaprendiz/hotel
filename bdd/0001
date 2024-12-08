@@ -1,0 +1,36 @@
+public function connexion()
+    {
+        // Vérification des champs obligatoires
+        if (empty($_POST['email']) || empty($_POST['pass'])) {
+            header('Location: ../vue/utilisateur/login.php?error=missing_fields');
+            exit;
+        }
+
+        // Vérification des informations d'identification
+        
+    /** var_dump($user);
+        * $user = $this->utilisateur->connexionUtilisateur($_POST['email'], $_POST['password']);
+        *die();
+        *var_dump($_POST['password']);
+        *var_dump($user['password']);
+        *var_dump($_POST['password'] == $user['password']);
+        *die;*/
+        $user = $this->utilisateur->login($_POST['email'],$_POST['pass']);
+        var_dump($user);
+        die();
+
+        if ($user) {
+            // Stockage des informations dans la session
+            $_SESSION['user'] = [
+                'id_utilisateur' => $user['id_utilisateur'],
+                'nom' => $user['nom'],
+                'email' => $user['email'],
+                'type' => $user['type'] ?? 'utilisateur' // Type par défaut si absent
+            ];
+            header('Location: ../index.php'); // Redirection après connexion réussie
+        } else {
+            header('Location: ../vue/utilisateur/login.php?error=invalid_credentials');
+            exit;
+        }
+    }
+    

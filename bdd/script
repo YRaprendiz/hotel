@@ -1,106 +1,72 @@
--- Script de création de base de données pour un système de gestion hôtelière
+-- Création de la base de données
+CREATE DATABASE IF NOT EXISTS hc;
 
--- Suppression des tables si elles existent déjà (dans l'ordre inverse des contraintes)
-DROP TABLE IF EXISTS COMMANDES;
-DROP TABLE IF EXISTS PAIEMENTS;
-DROP TABLE IF EXISTS RESERVATIONS;
-DROP TABLE IF EXISTS PRODUITS;
-DROP TABLE IF EXISTS CATEGORIES;
-DROP TABLE IF EXISTS CHAMBRES;
-DROP TABLE IF EXISTS UTILISATEURS;
+-- Utilisation de la base de données créée
+USE hc;
 
--- Création de la table UTILISATEURS
-CREATE TABLE UTILISATEURS (
-    id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
-    type VARCHAR(50) NOT NULL DEFAULT 'utilisateur',
+-- Table pour les rôles d'utilisateur (admin, client, etc.)
+CREATE TABLE IF NOT EXISTS roles (
+    id_roles INT AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+-- Insérer des rôles par défaut
+INSERT INTO roles (role_name) VALUES ('client'), ('admin');
+
+-- Table pour les utilisateurs
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id_utilisateur INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
     pass VARCHAR(255) NOT NULL,
-    telephone VARCHAR(20)
+    adress TEXT(255) NOT NULL,
+    role_id INT NOT NULL,
+    created_at int NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
--- Création de la table CHAMBRES
-CREATE TABLE CHAMBRES (
-    id_chambre INT PRIMARY KEY AUTO_INCREMENT,
-    numero VARCHAR(10) UNIQUE NOT NULL,
-    type VARCHAR(50) NOT NULL,
-    image 	longblob NOT NULL,
-    prix DECIMAL(10, 2) NOT NULL,
-    statut VARCHAR(20) NOT NULL DEFAULT 'disponible'
-);
-
--- Création de la table RESERVATIONS
-CREATE TABLE RESERVATIONS (
-    id_reservation INT PRIMARY KEY AUTO_INCREMENT,
-    id_utilisateur INT NOT NULL,
-    id_chambre INT NOT NULL,
-    date_debut DATE NOT NULL,
-    date_fin DATE NOT NULL,
-    prix_total DECIMAL(10, 2) NOT NULL,
-    statut VARCHAR(20) NOT NULL DEFAULT 'confirmée',
-    FOREIGN KEY (id_utilisateur) REFERENCES UTILISATEURS(id_utilisateur),
-    FOREIGN KEY (id_chambre) REFERENCES CHAMBRES(id_chambre)
-);
-
--- Création de la table PAIEMENTS
-CREATE TABLE PAIEMENTS (
-    id_paiement INT PRIMARY KEY AUTO_INCREMENT,
-    id_reservation INT NOT NULL,
-    montant DECIMAL(10, 2) NOT NULL,
-    date_paiement DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    methode VARCHAR(50) NOT NULL,
-    FOREIGN KEY (id_reservation) REFERENCES RESERVATIONS(id_reservation)
-);
-
--- Création de la table CATEGORIES
-CREATE TABLE CATEGORIES (
-    id_categorie INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100) NOT NULL UNIQUE,
-    description TEXT
-);
-
--- Création de la table PRODUITS
-CREATE TABLE PRODUITS (
-    id_produit INT PRIMARY KEY AUTO_INCREMENT,
-    id_categorie INT NOT NULL,
-    nom VARCHAR(100) NOT NULL,
-    prix DECIMAL(10, 2) NOT NULL,
+-- Table pour les chambres
+CREATE TABLE IF NOT EXISTS chambres (
+    id_chambre INT AUTO_INCREMENT PRIMARY KEY,
+    chambres_number VARCHAR(10) NOT NULL UNIQUE,
+    chambres_type VARCHAR(50) NOT NULL,  -- Par exemple : Simple, Double, Suite
+    prix DECIMAL(10, 2) NOT NULL,   -- Prix par nuit
     description TEXT,
-    FOREIGN KEY (id_categorie) REFERENCES CATEGORIES(id_categorie)
+    status ENUM('available', 'booked', 'maintenance') DEFAULT 'available'
 );
 
--- Création de la table COMMANDES
-CREATE TABLE COMMANDES (
-    id_commande INT PRIMARY KEY AUTO_INCREMENT,
-    id_reservation INT NOT NULL,
-    date_commande DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    statut VARCHAR(20) NOT NULL DEFAULT 'en cours',
-    montant_total DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (id_reservation) REFERENCES RESERVATIONS(id_reservation)
+-- Table pour les réservations
+CREATE TABLE IF NOT EXISTS reservations (
+    id_reservation INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT NOT NULL,
+    client_room_id INT NOT NULL,
+    check_in DATE NOT NULL,
+    check_out DATE NOT NULL,
+    status ENUM('confirmed', 'canceled', 'completed') DEFAULT 'confirmed',
+    FOREIGN KEY (client_id) REFERENCES utilisateurs(id_utilisateurs),
+    FOREIGN KEY (client_room_id) REFERENCES chambres(id_chambres)
 );
 
--- Création d'une table intermédiaire pour les produits dans les commandes
-CREATE TABLE COMMANDES_PRODUITS (
-    id_commande INT NOT NULL,
-    id_produit INT NOT NULL,
-    quantite INT NOT NULL DEFAULT 1,
-    PRIMARY KEY (id_commande, id_produit),
-    FOREIGN KEY (id_commande) REFERENCES COMMANDES(id_commande),
-    FOREIGN KEY (id_produit) REFERENCES PRODUITS(id_produit)
+-- Table pour les paiements
+CREATE TABLE IF NOT EXISTS payments (
+    id_payment INT AUTO_INCREMENT PRIMARY KEY,
+   reservations_id INT NOT NULL,
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    amount DECIMAL(10, 2) NOT NULL,
+    payment_method ENUM('credit_card', 'paypal', 'bank_transfer','espece') NOT NULL,
+    status ENUM('paid', 'pending', 'failed') DEFAULT 'pending',
+    FOREIGN KEY (reservations_id) REFERENCES reservations(id_reservations)
 );
 
--- Index pour optimiser les performances
-CREATE INDEX idx_reservation_utilisateur ON RESERVATIONS(id_utilisateur);
-CREATE INDEX idx_reservation_chambre ON RESERVATIONS(id_chambre);
-CREATE INDEX idx_produit_categorie ON PRODUITS(id_categorie);
-CREATE INDEX idx_commande_reservation ON COMMANDES(id_reservation);
-
--- Commentaires sur les tables
-COMMENT ON TABLE UTILISATEURS IS 'Table stockant les informations des utilisateurs';
-COMMENT ON TABLE CHAMBRES IS 'Table des chambres disponibles dans l''hôtel';
-COMMENT ON TABLE RESERVATIONS IS 'Table des réservations de chambres';
-COMMENT ON TABLE PAIEMENTS IS 'Table des transactions de paiement';
-COMMENT ON TABLE CATEGORIES IS 'Table des catégories de produits';
-COMMENT ON TABLE PRODUITS IS 'Table des produits disponibles';
-COMMENT ON TABLE COMMANDES IS 'Table des commandes associées aux réservations';
+-- Table pour les commentaires des clients par la page contact
+CREATE TABLE IF NOT EXISTS commentaires (
+    id_commentaire INT AUTO_INCREMENT PRIMARY KEY,
+    user_id_commentaires INT NOT NULL,
+    room_id_commentaires INT NOT NULL,
+    review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),  -- Note de 1 à 5
+    comment TEXT,
+    FOREIGN KEY (user_id_commentaire) REFERENCES utilisateurs(id_utilisateur),
+    FOREIGN KEY (room_id_commentaire) REFERENCES chambres(id_chambre)
+);
