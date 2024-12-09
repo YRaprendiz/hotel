@@ -1,18 +1,11 @@
 <?php
-class BaseModel {
-    protected $bdd;
-
-    public function __construct() {
-        try {
-            $this->bdd = new PDO('mysql:host=localhost;dbname=hc', 'root', '');
-            $this->bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die('Erreur de connexion : ' . $e->getMessage());
-        }
-    }
-}
-
 class FlashMessage {
+    /**
+     * Définit un message flash à afficher.
+     * 
+     * @param string $type Le type de message (success, danger, warning, info).
+     * @param string $message Le contenu du message.
+     */
     public static function set($type, $message) {
         if (!isset($_SESSION)) {
             session_start();
@@ -23,6 +16,10 @@ class FlashMessage {
         ];
     }
 
+    /**
+     * Affiche le message flash s'il est défini.
+     * Supprime le message après l'affichage.
+     */
     public static function display() {
         if (!isset($_SESSION)) {
             session_start();
@@ -30,7 +27,10 @@ class FlashMessage {
         if (isset($_SESSION['flash'])) {
             $type = $_SESSION['flash']['type'];
             $message = $_SESSION['flash']['message'];
-            echo "<div class='alert alert-{$type} text-center'>{$message}</div>";
+
+            echo "<div class='alert alert-{$type} text-center' role='alert'>{$message}</div>";
+
+            // Supprimer le message flash après affichage
             unset($_SESSION['flash']);
         }
     }
