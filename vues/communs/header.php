@@ -2,7 +2,6 @@
 <?php
 session_start();
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -57,8 +56,6 @@ session_start();
             </div>
         </nav>
     </header>
-    <?php FlashMessage::display(); ?>
-
     <?php if (isset($_SESSION['flash'])): ?>
     <div class="alert alert-<?= htmlspecialchars($_SESSION['flash']['type']) ?> text-center">
         <?= htmlspecialchars($_SESSION['flash']['message']) ?>

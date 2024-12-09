@@ -3,83 +3,57 @@ CREATE DATABASE IF NOT EXISTS hc;
 
 -- Utilisation de la base de données créée
 USE hc;
-
--- Table pour les rôles d'utilisateur (admin, client, etc.)
+-- Création de la table des rôles
 CREATE TABLE IF NOT EXISTS roles (
-    id_role INT AUTO_INCREMENT PRIMARY KEY,
-    role_name VARCHAR(50) NOT NULL UNIQUE
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL
 );
 
 -- Insérer des rôles par défaut
-INSERT INTO roles (role_name) VALUES ('G'),('client'), ('admin');
+INSERT INTO roles (nom) VALUES ('client'), ('admin');
 
--- Table pour les utilisateurs
+-- Création de la table des utilisateurs
 CREATE TABLE IF NOT EXISTS utilisateurs (
     id_utilisateur INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    pass VARCHAR(255) NOT NULL,
-    adress TEXT(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
     role_id INT NOT NULL,
-    created_at int NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES roles(id_role)
+    adresse TEXT,
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+    date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
--- Table pour les chambres
+-- Création de la table des chambres
 CREATE TABLE IF NOT EXISTS chambres (
     id_chambre INT AUTO_INCREMENT PRIMARY KEY,
-    chambres_number VARCHAR(10) NOT NULL UNIQUE,
-    chambres_type VARCHAR(50) NOT NULL,  -- Par exemple : Simple, Double, Suite
-    image LONGBLOB NOT NUL,
-    prix DECIMAL(10, 2) NOT NULL,   -- Prix par nuit
+    chambres_number VARCHAR(50) NOT NULL,
+    chambres_type VARCHAR(100) NOT NULL,
+    prix DECIMAL(10, 2) NOT NULL,
+    status ENUM('available', 'booked', 'maintenance') NOT NULL,
     description TEXT,
-    status ENUM('available', 'booked', 'maintenance') DEFAULT 'available'
+    image VARCHAR(255), -- Vous pouvez ajouter une image pour chaque chambre
+    date_ajout TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
--- Table pour les réservations
-CREATE TABLE IF NOT EXISTS reservations (
-    id_reservation INT AUTO_INCREMENT PRIMARY KEY,
-    client_id INT NOT NULL,
-    client_room_id INT NOT NULL,
-    check_in DATE NOT NULL,
-    check_out DATE NOT NULL,
-    status ENUM('confirmed', 'canceled', 'completed') DEFAULT 'confirmed',
-    FOREIGN KEY (client_id) REFERENCES utilisateurs(id_utilisateur),
-    FOREIGN KEY (client_room_id) REFERENCES chambres(id_chambre)
-);
-
--- Table pour les paiements
-CREATE TABLE IF NOT EXISTS payments (
-    id_payment INT AUTO_INCREMENT PRIMARY KEY,
-   reservations_id INT NOT NULL,
-    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    amount DECIMAL(10, 2) NOT NULL,
-    payment_method ENUM('credit_card', 'paypal', 'bank_transfer','espece') NOT NULL,
-    status ENUM('paid', 'pending', 'failed') DEFAULT 'pending',
-    FOREIGN KEY (reservations_id) REFERENCES reservations(id_reservation)
-);
-
--- Table pour les commentaires des clients par la page contact
-CREATE TABLE IF NOT EXISTS commentaires (
-    id_commentaire INT AUTO_INCREMENT PRIMARY KEY,
-    user_id_commentaire INT NOT NULL,
-    room_id_commentaire INT NOT NULL,
-    review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),  -- Note de 1 à 5
-    comment TEXT,
-    FOREIGN KEY (user_id_commentaire) REFERENCES utilisateurs(id_utilisateur),
-    FOREIGN KEY (room_id_commentaire) REFERENCES chambres(id_chambre)
-);
-
-
---contact
+-- Création de la table des messages de contact
 CREATE TABLE IF NOT EXISTS contacts (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
     message TEXT NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table des réservations (facultative, si vous souhaitez gérer les réservations)
+CREATE TABLE IF NOT EXISTS reservations (
+    id_reservation INT AUTO_INCREMENT PRIMARY KEY,
+    id_chambre INT NOT NULL,
+    id_utilisateur INT NOT NULL,
+    date_reservation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date_arrivee DATE NOT NULL,
+    date_depart DATE NOT NULL,
+    FOREIGN KEY (id_chambre) REFERENCES chambres(id_chambre) ON DELETE CASCADE,
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id_utilisateur) ON DELETE CASCADE
 );

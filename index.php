@@ -7,6 +7,10 @@ include_once('./controllers/ContactController.php');
 $page = $_GET['page'] ?? 'accueil';
 
 switch ($page) {
+    // public accueil
+    case 'accueil':
+        include('./vues/utilisateur/listeChambres.php');
+        break;
     // Utilisateur
     case 'login':
         include('./vues/utilisateur/login.php');

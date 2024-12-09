@@ -1,6 +1,6 @@
 <?php
 include_once('./bdd/connexion.php');
-class ChambreModel {
+class ChambreModel extends BaseModel  {
     private $bdd;
 
     public function __construct($bdd) {

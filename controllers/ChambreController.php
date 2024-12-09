@@ -4,6 +4,11 @@ include_once('./bdd/connexion.php');
 include_once('./models/ChambreModel.php');
 
 class ChambreController {
+    private $model;
+
+    public function __construct() {
+        $this->model = new ChambreModel();
+    }
     protected function setFlashMessage($type, $message) {
         if (!isset($_SESSION)) {
             session_start();
@@ -12,12 +17,6 @@ class ChambreController {
             'type' => $type,
             'message' => $message
         ];
-    }
-
-    private $model;
-
-    public function __construct() {
-        $this->model = new ChambreModel();
     }
 
     public function list() {

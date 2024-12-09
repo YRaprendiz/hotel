@@ -1,3 +1,5 @@
+<!-- chambres.php-->
+
 <?php
 include_once('../../bdd/connexion.php');
 include_once('../../controleur/chambreController.php');

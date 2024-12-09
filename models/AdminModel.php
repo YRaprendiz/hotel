@@ -1,4 +1,4 @@
-<?php
+//chambresModel<?php
 include_once('./bdd/connexion.php');
 
 class AdminModel extends BaseModel {
