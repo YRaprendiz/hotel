@@ -1,0 +1,191 @@
+Voici une répartition des fichiers typiques dans chaque dossier de l'arborescence projetée, avec leurs noms et fonctions associées. Cette structure correspond à une architecture MVC standard pour un projet web.
+
+---
+
+### **1. `bdd/`**
+- **Fichiers typiques** :
+  - `connexion.php` : Gère la connexion à la base de données via PDO. Ce fichier initialise la connexion et est inclus dans les fichiers nécessitant un accès à la base de données.
+
+---
+
+### **2. `controllers/`**
+- **Fichiers typiques** :
+  - `AuthController.php` : Gère les actions liées à l'authentification, telles que la connexion et la déconnexion.
+  - `ChambreController.php` : Contrôle les opérations relatives aux chambres, comme l'affichage des chambres disponibles et des détails d'une chambre.
+  - `ContactController.php` : Gère les actions liées au formulaire de contact (envoi de messages et récupération de la liste des messages pour les administrateurs).
+  - `UtilisateurController.php` : Gère les actions des utilisateurs, comme l'inscription, la modification du profil, et la gestion des rôles.
+  - `AdminController.php` : Contrôle les actions d'administration, comme l'ajout, la suppression et la modification d'utilisateurs ou de chambres.
+
+---
+
+### **3. `models/`**
+- **Fichiers typiques** :
+  - `BaseModel.php` : Définit la classe de base pour les modèles et initialise la connexion à la base de données.
+  - `UtilisateurModel.php` : Contient les méthodes pour interagir avec la table des utilisateurs (connexion, inscription, récupération des données utilisateur).
+  - `ChambreModel.php` : Contient les méthodes pour interagir avec la table des chambres (récupération des chambres, ajout, mise à jour, suppression).
+  - `ContactModel.php` : Contient les méthodes pour interagir avec la table des messages de contact (enregistrement des messages et récupération).
+  - `AdminModel.php` : Fournit des méthodes spécifiques pour les opérations d'administration.
+
+---
+
+### **4. `public/`**
+- **Sous-dossiers** :
+  - **`css/`** : Contient les fichiers CSS pour la mise en page et le style.
+    - `style.css` : Définit les styles globaux pour le projet.
+    - `admin.css` : Styles spécifiques au tableau de bord d'administration.
+    - `chambres.css` : Styles pour les pages relatives aux chambres.
+  - **`images/`** : Contient les images utilisées dans le projet.
+    - Exemples : `logo.png` (logo du site), `room1.jpg` (image d'une chambre).
+  - **`js/`** : Contient les fichiers JavaScript pour les interactions front-end.
+    - `scripts.js` : Scripts JavaScript globaux.
+    - `form_validation.js` : Scripts de validation des formulaires.
+
+---
+
+### **5. `vues/`**
+#### Sous-dossiers typiques et leur contenu :
+- **`admin/`** :
+  - `dashboard.php` : Page principale du tableau de bord administrateur, affichant des statistiques ou des options de gestion.
+  - `addUser.php` : Formulaire pour ajouter un utilisateur.
+  - `editUser.php` : Formulaire pour modifier les informations d'un utilisateur.
+  - `addRoom.php` : Formulaire pour ajouter une chambre.
+  - `editRoom.php` : Formulaire pour modifier une chambre.
+
+- **`chambre/`** :
+  - `listeChambres.php` : Page listant toutes les chambres disponibles.
+  - `detailsChambre.php` : Page affichant les détails d'une chambre spécifique.
+
+- **`communs/`** :
+  - `header.php` : En-tête commun à toutes les pages, incluant la barre de navigation.
+  - `footer.php` : Pied de page commun à toutes les pages.
+  - `messages.php` : Fichier pour afficher les messages flash.
+
+- **`contact/`** :
+  - `form.php` : Formulaire pour soumettre un message de contact.
+  - `list.php` : Liste des messages reçus (accessible par l'administrateur).
+
+- **`utilisateur/`** :
+  - `login.php` : Formulaire de connexion pour les utilisateurs.
+  - `register.php` : Formulaire d'inscription pour les nouveaux utilisateurs.
+  - `profile.php` : Page de profil de l'utilisateur connecté, affichant ses informations.
+
+---
+
+### **Récapitulatif de la fonction de chaque dossier :**
+| **Dossier**        | **Fonction**                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| **bdd/**            | Gère la connexion à la base de données.                                    |
+| **controllers/**    | Contient les contrôleurs pour orchestrer les actions et les données.        |
+| **models/**         | Définit les modèles pour interagir avec la base de données.                |
+| **public/**         | Contient les ressources statiques comme CSS, JS, et images.                |
+| **vues/**           | Regroupe toutes les vues pour afficher le contenu au client.               |
+| **vues/admin/**     | Gère les vues spécifiques à l'administration.                              |
+| **vues/chambre/**   | Gère les vues relatives aux chambres.                                      |
+| **vues/communs/**   | Contient les éléments communs à plusieurs pages (header, footer, messages). |
+| **vues/contact/**   | Gère les vues liées au formulaire de contact et à la gestion des messages. |
+| **vues/utilisateur/** | Gère les vues liées aux utilisateurs (connexion, inscription, profil).   |
+
+Si vous souhaitez une révision ou un ajout spécifique à l'un de ces fichiers, faites-le moi savoir !
+
+Voici une version complète et structurée de l'arborescence typique pour votre projet basé sur l'architecture MVC. Elle inclut les dossiers mentionnés dans votre question, les fichiers associés, et leur organisation logique.
+
+---
+
+### **Arborescence du Projet**
+```plaintext
+├── bdd/                   # Connexion et scripts liés à la base de données
+│   └── connexion.php      # Fichier de connexion à la base de données
+│   └── script.sql         # Scripts SQL pour créer ou initialiser la base de données
+│
+├── controllers/           # Contient les fichiers pour orchestrer les actions et les données
+│   ├── AuthController.php         # Gère l'authentification (connexion, déconnexion)
+│   ├── ChambreController.php      # Gère les actions liées aux chambres
+│   ├── ContactController.php      # Gère le formulaire et les messages de contact
+│   ├── UtilisateurController.php  # Gère les actions utilisateur (inscription, profil)
+│   └── AdminController.php        # Gère les actions d'administration (gestion des utilisateurs/chambres)
+│
+├── models/                # Contient les fichiers de modèles pour interagir avec la base de données
+│   ├── BaseModel.php              # Classe de base pour la connexion PDO
+│   ├── UtilisateurModel.php       # Interagit avec la table des utilisateurs
+│   ├── ChambreModel.php           # Interagit avec la table des chambres
+│   ├── ContactModel.php           # Interagit avec la table des messages de contact
+│   └── AdminModel.php             # Contient les méthodes spécifiques pour l'administration
+│
+├── public/                # Contient les ressources statiques
+│   ├── css/                       # Styles CSS
+│   │   ├── style.css              # Styles globaux
+│   │   ├── admin.css              # Styles spécifiques pour l'administration
+│   │   └── chambre.css            # Styles spécifiques aux pages chambre
+│   ├── images/                    # Images utilisées dans le projet
+│   │   ├── logo.png               # Logo du site
+│   │   ├── chambre1.jpg           # Exemple d'image de chambre
+│   │   └── utilisateur.jpg        # Exemple d'image utilisateur
+│   └── js/                        # Scripts JavaScript
+│       ├── scripts.js             # Scripts globaux
+│       └── validation.js          # Validation des formulaires
+│
+├── vues/                  # Contient les fichiers pour afficher les données
+│   ├── admin/                     # Vues liées à l'administration
+│   │   ├── dashboard.php          # Tableau de bord administrateur
+│   │   ├── addUser.php            # Formulaire pour ajouter un utilisateur
+│   │   ├── editUser.php           # Formulaire pour modifier un utilisateur
+│   │   ├── addRoom.php            # Formulaire pour ajouter une chambre
+│   │   └── editRoom.php           # Formulaire pour modifier une chambre
+│   │
+│   ├── chambre/                   # Vues liées aux chambres
+│   │   ├── listeChambres.php      # Liste des chambres disponibles
+│   │   └── detailsChambre.php     # Détails d'une chambre spécifique
+│   │
+│   ├── communs/                   # Fichiers communs à plusieurs pages
+│   │   ├── header.php             # En-tête commun (barre de navigation)
+│   │   ├── footer.php             # Pied de page commun
+│   │   └── messages.php           # Messages d'information/erreurs (FlashMessage)
+│   │
+│   ├── contact/                   # Vues liées au formulaire de contact
+│   │   ├── form.php               # Formulaire pour envoyer un message
+│   │   └── list.php               # Liste des messages pour l'administrateur
+│   │
+│   ├── utilisateur/               # Vues pour les utilisateurs
+│   │   ├── login.php              # Formulaire de connexion
+│   │   ├── register.php           # Formulaire d'inscription
+│   │   └── profile.php            # Page de profil utilisateur
+│   │
+│   └── accueil.php                # Page d'accueil principale
+│
+├── index.php              # Point d'entrée principal pour gérer les routes
+└── routes.php             # Fichier optionnel pour centraliser la gestion des routes
+```
+
+---
+
+### **Fonctions de l’arborescence**
+1. **`bdd/`** : 
+   - Gère la connexion à la base de données via PDO.
+   - Stocke les scripts SQL nécessaires à l'initialisation ou à la maintenance de la base.
+
+2. **`controllers/`** :
+   - Coordonne les actions entre les modèles et les vues.
+   - Exécute la logique métier pour chaque fonctionnalité (connexion, gestion des chambres, etc.).
+
+3. **`models/`** :
+   - Fournit des méthodes pour interagir avec les tables de la base de données.
+   - Centralise la logique liée aux données pour chaque entité (utilisateur, chambre, etc.).
+
+4. **`public/`** :
+   - Contient les fichiers accessibles directement par le client.
+   - Stocke les styles, images et scripts JavaScript utilisés dans l'interface utilisateur.
+
+5. **`vues/`** :
+   - Affiche les données préparées par les contrôleurs.
+   - Chaque sous-dossier regroupe des vues spécifiques à une fonctionnalité ou une entité.
+
+6. **`index.php`** :
+   - Point d'entrée unique du projet.
+   - Gère la logique de routage et inclut les contrôleurs pour exécuter les actions demandées.
+
+7. **`routes.php`** *(optionnel)* :
+   - Centralise les routes si vous préférez externaliser leur gestion depuis `index.php`.
+
+---
+
+Si vous avez besoin de précisions ou d'aide pour implémenter une fonctionnalité spécifique dans cette structure, je suis à votre disposition !
