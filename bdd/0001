@@ -1,36 +1,45 @@
-public function connexion()
-    {
-        // Vérification des champs obligatoires
-        if (empty($_POST['email']) || empty($_POST['pass'])) {
-            header('Location: ../vue/utilisateur/login.php?error=missing_fields');
-            exit;
-        }
+<?php
+// controllers/ChambreController.php
 
-        // Vérification des informations d'identification
-        
-    /** var_dump($user);
-        * $user = $this->utilisateur->connexionUtilisateur($_POST['email'], $_POST['password']);
-        *die();
-        *var_dump($_POST['password']);
-        *var_dump($user['password']);
-        *var_dump($_POST['password'] == $user['password']);
-        *die;*/
-        $user = $this->utilisateur->login($_POST['email'],$_POST['pass']);
-        var_dump($user);
-        die();
+include 'models/Chambre.php';
 
-        if ($user) {
-            // Stockage des informations dans la session
-            $_SESSION['user'] = [
-                'id_utilisateur' => $user['id_utilisateur'],
-                'nom' => $user['nom'],
-                'email' => $user['email'],
-                'type' => $user['type'] ?? 'utilisateur' // Type par défaut si absent
-            ];
-            header('Location: ../index.php'); // Redirection après connexion réussie
+class ChambreController {
+    public function list() {
+        $chambreModel = new Chambre();
+        $chambres = $chambreModel->getAll();
+        include 'views/chambres/list.php';
+    }
+
+    public function add() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $chambreModel = new Chambre();
+            $chambreModel->create(
+                $_POST['room_number'],
+                $_POST['room_type'],
+                $_POST['price'],
+                $_POST['description']
+            );
+            header("Location: index.php?action=list_chambres");
         } else {
-            header('Location: ../vue/utilisateur/login.php?error=invalid_credentials');
-            exit;
+            include 'views/chambres/add.php';
         }
     }
-    
+
+    public function edit($id) {
+        $chambreModel = new Chambre();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $chambreModel->update(
+                $id,
+                $_POST['room_number'],
+                $_POST['room_type'],
+                $_POST['price'],
+                $_POST['description']
+            );
+            header("Location: index.php?action=list_chambres");
+        } else {
+            $chambre = $chambreModel->getById($id);
+            include 'views/chambres/edit.php';
+        }
+    }
+}
+?>

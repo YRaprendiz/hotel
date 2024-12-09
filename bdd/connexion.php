@@ -2,7 +2,7 @@
 try{
     $user = "root";
     $pass = "";
-    $connexion_hc = new PDO('mysql:host=localhost;dbname=hotel_chat', $utilisateur, $pass);
+    $connexion_hc = new PDO('mysql:host=localhost;dbname=hc', $user, $pass);
     
 }catch(PDOException $e){
     print "Erreur! Échec de la connexion:" . $e->getMessage() . "<br/>";

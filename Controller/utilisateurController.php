@@ -1,7 +1,7 @@
 <?php
 session_start();
-include('../bdd/connexion.php');
-include('../modele/utilisateurModele.php');
+include('./bdd/connexion.php');
+include('./modele/utilisateurModele.php');
 include('./authController.php');
 
 

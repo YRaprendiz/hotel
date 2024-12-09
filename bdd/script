@@ -6,12 +6,12 @@ USE hc;
 
 -- Table pour les rôles d'utilisateur (admin, client, etc.)
 CREATE TABLE IF NOT EXISTS roles (
-    id_roles INT AUTO_INCREMENT PRIMARY KEY,
+    id_role INT AUTO_INCREMENT PRIMARY KEY,
     role_name VARCHAR(50) NOT NULL UNIQUE
 );
 
 -- Insérer des rôles par défaut
-INSERT INTO roles (role_name) VALUES ('client'), ('admin');
+INSERT INTO roles (role_name) VALUES ('G'),('client'), ('admin');
 
 -- Table pour les utilisateurs
 CREATE TABLE IF NOT EXISTS utilisateurs (
@@ -23,18 +23,21 @@ CREATE TABLE IF NOT EXISTS utilisateurs (
     adress TEXT(255) NOT NULL,
     role_id INT NOT NULL,
     created_at int NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES roles(id)
+    FOREIGN KEY (role_id) REFERENCES roles(id_role)
 );
+
 
 -- Table pour les chambres
 CREATE TABLE IF NOT EXISTS chambres (
     id_chambre INT AUTO_INCREMENT PRIMARY KEY,
     chambres_number VARCHAR(10) NOT NULL UNIQUE,
     chambres_type VARCHAR(50) NOT NULL,  -- Par exemple : Simple, Double, Suite
+    image LONGBLOB NOT NUL,
     prix DECIMAL(10, 2) NOT NULL,   -- Prix par nuit
     description TEXT,
     status ENUM('available', 'booked', 'maintenance') DEFAULT 'available'
 );
+
 
 -- Table pour les réservations
 CREATE TABLE IF NOT EXISTS reservations (
@@ -44,8 +47,8 @@ CREATE TABLE IF NOT EXISTS reservations (
     check_in DATE NOT NULL,
     check_out DATE NOT NULL,
     status ENUM('confirmed', 'canceled', 'completed') DEFAULT 'confirmed',
-    FOREIGN KEY (client_id) REFERENCES utilisateurs(id_utilisateurs),
-    FOREIGN KEY (client_room_id) REFERENCES chambres(id_chambres)
+    FOREIGN KEY (client_id) REFERENCES utilisateurs(id_utilisateur),
+    FOREIGN KEY (client_room_id) REFERENCES chambres(id_chambre)
 );
 
 -- Table pour les paiements
@@ -56,14 +59,14 @@ CREATE TABLE IF NOT EXISTS payments (
     amount DECIMAL(10, 2) NOT NULL,
     payment_method ENUM('credit_card', 'paypal', 'bank_transfer','espece') NOT NULL,
     status ENUM('paid', 'pending', 'failed') DEFAULT 'pending',
-    FOREIGN KEY (reservations_id) REFERENCES reservations(id_reservations)
+    FOREIGN KEY (reservations_id) REFERENCES reservations(id_reservation)
 );
 
 -- Table pour les commentaires des clients par la page contact
 CREATE TABLE IF NOT EXISTS commentaires (
     id_commentaire INT AUTO_INCREMENT PRIMARY KEY,
-    user_id_commentaires INT NOT NULL,
-    room_id_commentaires INT NOT NULL,
+    user_id_commentaire INT NOT NULL,
+    room_id_commentaire INT NOT NULL,
     review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),  -- Note de 1 à 5
     comment TEXT,

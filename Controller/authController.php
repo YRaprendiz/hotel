@@ -1,8 +1,8 @@
 <?php
 // controllers/AuthController.php
 session_start();
-require_once '../config/database.php';
-require_once './User.php';
+include('./bdd/connexion.php');
+include('./vue/utilisateur/');
 
 class AuthController {
     private $db;
