@@ -1,6 +1,6 @@
 <!-- ContactController.php -->
 <?php
-include_once('./bdd/connexion.php');
+
 include_once('./models/ContactModel.php');
 
 class ContactController {

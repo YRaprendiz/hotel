@@ -1,6 +1,6 @@
 <!-- ChambreController.php -->
 <?php
-include('./bdd/connexion.php');
+
 include('./models/ChambreModel.php');
 
 class ChambreController {

@@ -1,4 +1,5 @@
 <?php
+include_once('./bdd/connexion.php');
 include_once('./controller/UtilisateurController.php');
 include_once('./controller/ChambreController.php');
 include_once('./controller/AdminController.php');
@@ -147,6 +148,6 @@ switch ($page) {
     
 
     default:
-        include('./vues/accueil.php');
+        include('./vue/accueil.php');
         break;
 }

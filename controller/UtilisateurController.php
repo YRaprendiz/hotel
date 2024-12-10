@@ -1,7 +1,7 @@
 <!-- UtilisateurController.php -->
 <?php
-include_once('./bdd/connexion.php');
-include_once('./model/UtilisateurModel.php');
+
+include_once('./models/UtilisateurModel.php');
 
 class UtilisateurController {
     protected function setFlashMessage($type, $message) {

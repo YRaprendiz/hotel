@@ -1,5 +1,5 @@
 <?php
-include_once('./bdd/connexion.php');
+
 
 class ChambreModel extends BaseModel {
     // Récupérer toutes les chambres
@@ -15,11 +15,10 @@ class ChambreModel extends BaseModel {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    private $bdd;
 
-    public function __construct($bdd) {
-        $this->bdd = $bdd;
-    }
+    public function __construct() {
+       parent::__construct();
+        }
 
 
 }

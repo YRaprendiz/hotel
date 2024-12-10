@@ -1,4 +1,4 @@
-<?php include('./communs/header.php'); ?>
+<?php include('communs/header.php'); ?>
 
 <div class="container my-5">
     <h1 class="text-center">Bienvenue sur notre Hôtel</h1>
@@ -28,4 +28,4 @@
     </div>
 </div>
 
-<?php include('./communs/footer.php'); ?>
+<?php include('communs/footer.php'); ?>

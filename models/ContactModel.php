@@ -1,5 +1,5 @@
 <?php
-include_once('./bdd/connexion.php');
+
 
 class ContactModel extends BaseModel {
     public function saveMessage($nom, $email, $message) {
