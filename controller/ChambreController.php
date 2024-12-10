@@ -1,7 +1,7 @@
 <!-- ChambreController.php -->
 <?php
-include_once('./bdd/connexion.php');
-include_once('./models/ChambreModel.php');
+include('./bdd/connexion.php');
+include('./models/ChambreModel.php');
 
 class ChambreController {
     private $model;
@@ -18,7 +18,7 @@ class ChambreController {
             'message' => $message
         ];
     }
-
+    // Récupérer toutes les chambres
     public function list() {
         $chambres = $this->model->getAll();
         if ($chambres) {
@@ -28,7 +28,7 @@ class ChambreController {
         }
         return $chambres;
     }
-
+    // Récupérer les détails d'une chambre
     public function details($id) {
         $chambre = $this->model->getById($id);
         if ($chambre) {

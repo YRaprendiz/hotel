@@ -1,4 +1,4 @@
-//connexion.php
+
 <?php
 class BaseModel {
     protected $bdd;

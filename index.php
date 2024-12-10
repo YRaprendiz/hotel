@@ -1,16 +1,12 @@
 <?php
-include_once('./controllers/UtilisateurController.php');
-include_once('./controllers/ChambreController.php');
-include_once('./controllers/AdminController.php');
-include_once('./controllers/ContactController.php');
+include_once('./controller/UtilisateurController.php');
+include_once('./controller/ChambreController.php');
+include_once('./controller/AdminController.php');
+include_once('./controller/ContactController.php');
 
 $page = $_GET['page'] ?? 'accueil';
 
 switch ($page) {
-    // public accueil
-    case 'accueil':
-        include('./vues/utilisateur/listeChambres.php');
-        break;
     // Utilisateur
     case 'login':
         include('./vues/utilisateur/login.php');
@@ -151,8 +147,6 @@ switch ($page) {
     
 
     default:
-        include('./vues/communs/header.php');
-        echo '<div class="container"><h1>Bienvenue sur notre site hôtelier !</h1></div>';
-        include('./vues/communs/footer.php');
+        include('./vues/accueil.php');
         break;
 }

@@ -1,8 +1,5 @@
 -- Création de la base de données
 CREATE DATABASE IF NOT EXISTS hc;
-
--- Utilisation de la base de données créée
-USE hc;
 -- Création de la table des rôles
 CREATE TABLE IF NOT EXISTS roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -57,3 +54,43 @@ CREATE TABLE IF NOT EXISTS reservations (
     FOREIGN KEY (id_chambre) REFERENCES chambres(id_chambre) ON DELETE CASCADE,
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(id_utilisateur) ON DELETE CASCADE
 );
+
+====================================================
+-- Création de la base de données
+CREATE DATABASE IF NOT EXISTS hc;
+USE hc;
+
+-- Création de la table des rôles
+CREATE TABLE IF NOT EXISTS roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL
+);
+
+-- Insérer des rôles par défaut
+INSERT INTO roles (nom) VALUES ('client'), ('admin');
+
+-- Création de la table des utilisateurs
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id_utilisateur INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    prenom VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role_id INT NOT NULL,
+    adresse TEXT,
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+    date_inscription TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Création de la table des chambres
+CREATE TABLE IF NOT EXISTS chambres (
+    id_chambre INT AUTO_INCREMENT PRIMARY KEY,
+    chambres_number VARCHAR(50) NOT NULL,
+    chambres_type VARCHAR(100) NOT NULL,
+    prix DECIMAL(10, 2) NOT NULL,
+    status ENUM('available', 'booked', 'maintenance') NOT NULL,
+    description TEXT,
+    image VARCHAR(255),
+    date_ajout TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+

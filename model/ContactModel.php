@@ -20,4 +20,3 @@ class ContactModel extends BaseModel {
     }
 }
 ?>
-s

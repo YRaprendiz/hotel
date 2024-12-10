@@ -1,11 +1,9 @@
-<!-- chambres.php-->
-
 <?php
-include_once('../../bdd/connexion.php');
-include_once('../../controleur/chambreController.php');
+include('../../bdd/connexion.php');
+include('./controllers/ChambreController.php');
 
 $controller = new ChambreController($bdd);
-$chambres = $controller->afficherToutesLesChambres();
+$chambres = $controller->list();
 ?>
 
 <!DOCTYPE html>
