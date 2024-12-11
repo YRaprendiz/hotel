@@ -1,4 +1,4 @@
-//chambresModel<?php
+<?php
 
 
 class AdminModel extends BaseModel {

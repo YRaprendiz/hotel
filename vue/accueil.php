@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Explorez notre Hôtel</h5>
                     <p class="card-text">L'hôtel propose une large gamme de chambres adaptées à tous vos besoins. Venez découvrir notre établissement moderne et confortable.</p>
-                    <a href="../index.php?page=listeChambres" class="btn btn-primary">Voir nos chambres</a>
+                    <a href="../vue/chambre/listeChambres.php" class="btn btn-primary">Voir nos chambres</a>
                 </div>
             </div>
         </div>

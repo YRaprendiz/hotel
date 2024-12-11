@@ -1,6 +1,5 @@
 <?php
 
-
 class ChambreModel extends BaseModel {
     // Récupérer toutes les chambres
     public function getAll() {
@@ -17,8 +16,9 @@ class ChambreModel extends BaseModel {
     }
 
     public function __construct() {
-       parent::__construct();
-        }
+    
+        parent::__construct();
+    }
 
 
 }

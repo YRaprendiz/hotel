@@ -1,4 +1,4 @@
-<?php include('./vues/communs/header.php'); ?>
+<?php include('./vue/communs/header.php'); ?>
 
 <div class="container my-5">
     <h1>Contactez-nous</h1>
@@ -27,4 +27,4 @@
     </form>
 </div>
 
-<?php include('./vues/communs/footer.php'); ?>
+<?php include('./vue/communs/footer.php'); ?>

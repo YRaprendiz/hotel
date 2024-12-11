@@ -1,4 +1,4 @@
-<?php include('./vues/communs/header.php'); ?>
+<?php include('./vue/communs/header.php'); ?>
 
 <div class="container my-5">
     <h1>Liste des Messages de Contact</h1>
@@ -29,4 +29,4 @@
     <?php endif; ?>
 </div>
 
-<?php include('./vues/communs/footer.php'); ?>
+<?php include('./vue/communs/footer.php'); ?>

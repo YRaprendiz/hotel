@@ -1,7 +1,4 @@
-//detailschambres.php 
-<?php include('/xampp/htdocs/GitYR/hotel/vues/communs/header.php'); ?>
-
-<?php include('vues/communs/header.php'); ?>
+<?php include('./vue/communs/header.php'); ?>
 
 <div class="container my-5">
     <?php if (!empty($chambre)): ?>
@@ -18,6 +15,5 @@
     <?php endif; ?>
 </div>
 
-<?php include('vues/communs/footer.php'); ?>
+<?php include('./vue/communs/footer.php'); ?>
 
-<?php include('views/communs/footer.php'); ?>

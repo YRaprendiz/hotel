@@ -10,11 +10,11 @@ $page = $_GET['page'] ?? 'accueil';
 switch ($page) {
     // Utilisateur
     case 'login':
-        include('./vues/utilisateur/login.php');
+        include('./vue/utilisateur/login.php');
         break;
 
     case 'register':
-        include('./vues/utilisateur/resgister.php');
+        include('./vue/utilisateur/resgister.php');
         break;
 
     case 'profile':
@@ -35,7 +35,7 @@ switch ($page) {
     case 'listeChambres':
         $controller = new ChambreController();
         $chambres = $controller->list();
-        include('./vues/chambre/listeChambres.php');
+        include('./vue/chambre/listeChambres.php');
         break;
 
     case 'detailsChambre':
@@ -46,7 +46,7 @@ switch ($page) {
             exit;
         }
         $chambre = $controller->details($id);
-        include('./vues/chambre/detailsChambre.php');
+        include('./vue/chambre/detailsChambre.php');
         break;
 
     // Admin - Gestion des utilisateurs
@@ -122,7 +122,7 @@ switch ($page) {
 
     // Contact
     case 'contact':
-        include('./vues/contact/form.php');
+        include('./vue/contact/form.php');
         break;
     
     case 'contactAction':

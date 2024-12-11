@@ -1,14 +1,5 @@
-<?php include('./vues/communs/header.php'); ?>
-<?php
-if ($controller->register($_POST)) {
-    FlashMessage::set('success', 'Inscription réussie ! Bienvenue !');
-    header('Location: index.php?page=login');
-} else {
-    FlashMessage::set('danger', 'Échec de l’inscription. Veuillez réessayer.');
-    header('Location: index.php?page=register');
-}
-exit;
-?>
+<?php include('./vue/communs/header.php'); ?>
+
 <div class="container">
     <h2>Inscription</h2>
     <form action="index.php?page=registerAction" method="POST">
@@ -36,4 +27,14 @@ exit;
     </form>
     <p>Déjà inscrit ? <a href="index.php?page=login">Connectez-vous ici</a></p>
 </div>
-<?php include('vues/communs/footer.php'); ?>
+<?php include('./vue/communs/footer.php'); ?> 
+<!--<?php
+if ($controller->register($_POST['email'])) {
+    FlashMessage::set('success', 'Inscription réussie ! Bienvenue !');
+    header('Location: index.php?page=login');
+} else {
+    FlashMessage::set('danger', 'Échec de l’inscription. Veuillez réessayer.');
+    header('Location: index.php?page=register');
+}
+exit;
+?>-->
