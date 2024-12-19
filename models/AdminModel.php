@@ -3,17 +3,17 @@
 
 class AdminModel extends BaseModel {
     // Gestion des utilisateurs
-    public function addUser($nom, $prenom, $email, $password, $role) {
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    public function addUser($nom, $prenom, $email, $pass, $role) {
+        $hashedpass = password_hash($pass, PASSWORD_BCRYPT);
         $stmt = $this->bdd->prepare("
-            INSERT INTO utilisateurs (nom, prenom, email, password, role_id)
-            VALUES (:nom, :prenom, :email, :password, :role_id)
+            INSERT INTO utilisateurs (nom, prenom, email, pass, role_id)
+            VALUES (:nom, :prenom, :email, :pass, :role_id)
         ");
         return $stmt->execute([
             'nom' => $nom,
             'prenom' => $prenom,
             'email' => $email,
-            'password' => $hashedPassword,
+            'pass' => $hashedPassword,
             'role_id' => $role
         ]);
     }
@@ -21,7 +21,7 @@ class AdminModel extends BaseModel {
     public function updateUser($id, $data) {
         $stmt = $this->bdd->prepare("
             UPDATE utilisateurs SET nom = :nom, prenom = :prenom, email = :email, role_id = :role_id
-            WHERE id_utilisateur = :id
+            WHERE id_user = :id
         ");
         return $stmt->execute([
             'nom' => $data['nom'],
@@ -33,7 +33,7 @@ class AdminModel extends BaseModel {
     }
 
     public function deleteUser($id) {
-        $stmt = $this->bdd->prepare("DELETE FROM utilisateurs WHERE id_utilisateur = :id");
+        $stmt = $this->bdd->prepare("DELETE FROM utilisateurs WHERE id_user = :id");
         return $stmt->execute(['id' => $id]);
     }
 

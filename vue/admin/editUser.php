@@ -11,7 +11,7 @@ exit;
 ?>
 <div class="container">
     <h1>Modifier un utilisateur</h1>
-    <form action="index.php?page=editUserAction&id=<?= $user['id_utilisateur'] ?>" method="POST">
+    <form action="index.php?page=editUserAction&id=<?= $user['id_user'] ?>" method="POST">
         <label>Nom :</label>
         <input type="text" name="nom" value="<?= htmlspecialchars($user['nom']) ?>" required>
         <label>Prénom :</label>

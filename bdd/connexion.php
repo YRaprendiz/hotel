@@ -1,7 +1,7 @@
 
 <?php
 class BaseModel {
-    protected $bdd;
+    public $bdd;
 
     public function __construct() {
         try {

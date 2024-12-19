@@ -17,7 +17,7 @@
         </div>
         <div>
             <label>Mot de passe :</label>
-            <input type="password" name="password" required>
+            <input type="pass" name="pass" required>
         </div>
         <div>
             <label>Adresse :</label>

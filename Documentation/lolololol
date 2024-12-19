@@ -1,0 +1,12 @@
+6. Proteger Páginas Restritas
+Para proteger páginas restritas, adicione uma verificação de sessão no início do arquivo.
+
+php
+Copier le code
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: index.php?page=login');
+    exit();
+}
+?>

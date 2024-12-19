@@ -12,7 +12,7 @@ class AdminController {
 
     // Gestion des utilisateurs
     public function addUser($data) {
-        if ($this->model->addUser($data['nom'], $data['prenom'], $data['email'], $data['password'], $data['role'])) {
+        if ($this->model->addUser($data['nom'], $data['prenom'], $data['email'], $data['pass'], $data['role'])) {
             $_SESSION['message'] = ['type' => 'success', 'content' => 'Utilisateur ajouté avec succès.'];
         } else {
             $_SESSION['message'] = ['type' => 'danger', 'content' => 'Erreur lors de l’ajout de l’utilisateur.'];

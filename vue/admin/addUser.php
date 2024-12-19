@@ -9,7 +9,7 @@
         <label>Email :</label>
         <input type="email" name="email" required>
         <label>Mot de passe :</label>
-        <input type="password" name="password" required>
+        <input type="pass" name="pass" required>
         <label>Rôle :</label>
         <select name="role">
             <option value="1">Client</option>

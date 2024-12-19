@@ -15,14 +15,13 @@ class AuthController {
     }
 
     public static function isLoggedIn() {
-        return isset($_SESSION['utilisateur']);
+        return isset($_SESSION['id_user']);
     }
 
     public static function logout() {
         session_start();
         session_unset();
         session_destroy();
-
         $this->setFlashMessage('success', 'Déconnexion réussie.');
         header('Location: index.php');
         exit;
